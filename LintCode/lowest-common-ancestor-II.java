@@ -1,3 +1,5 @@
+//method1 runntime o(d), d is the deeper node
+
 public class Solution {
     /**
      * @param root: The root of the tree
@@ -41,5 +43,40 @@ public class Solution {
             depthDiff--;
         }
         return node;
+    }
+}
+
+//method2 store in a arrayList, use o(d) space, o(t) time
+//t is length until the first difference node
+
+public class Solution {
+    /**
+     * @param root: The root of the tree
+     * @param A, B: Two node in the tree
+     * @return: The lowest common ancestor of A and B
+     */
+    
+        
+    public ParentTreeNode lowestCommonAncestorII(ParentTreeNode root,
+                                                 ParentTreeNode A,
+                                                 ParentTreeNode B) {
+        List<ParentTreeNode> listA = putIntoArrayList(A);
+        List<ParentTreeNode> listB = putIntoArrayList(B);
+        int i = 0, j = 0;
+        for (i = listA.size() - 1, j = listB.size() - 1; i >= 0 && j >= 0; i--, j--) {
+            if (listA.get(i) != listB.get(j)) {
+                return listB.get(j).parent;
+            }
+        }
+        return listB.get(j + 1);
+    }
+    
+    public ArrayList<ParentTreeNode> putIntoArrayList(ParentTreeNode node) {
+        ArrayList<ParentTreeNode> list = new ArrayList<ParentTreeNode>();
+        while (node != null) {
+            list.add(node);
+            node = node.parent;
+        }
+        return list;
     }
 }
