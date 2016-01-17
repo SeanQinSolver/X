@@ -20,7 +20,7 @@ public class Solution {
     }
 }
 
-//Method2 one loops
+//Method2 one loops 
 
 public class Solution {
     public void sortLetters(char[] chars) {
@@ -29,6 +29,8 @@ public class Solution {
        while (i <= j) {
             while (i <= j && Character.isLowerCase(chars[i])) i++;
             while (i <= j && Character.isUpperCase(chars[j])) j--;
+            // the i <= j is important cuz last step corner case. otherwise the last step
+            //will do wrong things.
             if (i <= j) {
                 temp = chars[i];
                 chars[i] = chars[j];
