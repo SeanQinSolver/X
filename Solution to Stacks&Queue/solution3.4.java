@@ -1,4 +1,4 @@
-//Solution3.4  注意的是stack2有T的时候加东西必须把stack2所有放入在放出
+//Solution3.4  注意的是stack2有T的时候加东西必须把stack2所有放入在放出                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 
 public class MyQueue<T> {
 	private Stack<T> stack1;
