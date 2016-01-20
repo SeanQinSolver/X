@@ -18,7 +18,7 @@ public class Solution {
                 temp += nums[j];
             }
         }
-        return nums.length == ! ? temp : max;
+        return nums.length == 1 ? temp : max;
     }
 }
 

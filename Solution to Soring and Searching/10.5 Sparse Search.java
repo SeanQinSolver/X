@@ -3,7 +3,7 @@ public class Solution {
 		if (first > last) return -1;
 
 		int mid = (last + first) / 2;
-		//if the mid is a empty string, find the nearest non-empty string
+		//if the mid is a empty string, find the nearest non-empty string      
 		if (strings[mid].isEmpty()) {
 			int left = mid - 1;
 			int right = mid + 1;

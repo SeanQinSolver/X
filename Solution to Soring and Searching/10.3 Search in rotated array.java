@@ -20,7 +20,7 @@ public class Solution {
 			if (a[mid] != a[right]) {
 				return search(a, mid + 1, right, x);
 			} else {
-				int result = search(a, left, mid - 1, x);
+				int result = search(a, left, mid - 1 x);
 				if (result = -1) {
 					return search(a, mid + 1, right, x);
 				} else {

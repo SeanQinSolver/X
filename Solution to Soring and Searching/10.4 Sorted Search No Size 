@@ -7,8 +7,8 @@ public class Solution {
 		return binarySearch(list, value, index / 2, index);
 	} 
 
-	int binarySearch(Listy list, int value, int low, int high) {
-		int mid;
+	public int binarySearch(Listy list, int value, int low, int high) {
+		private int mid;
 
 		while (low <= high) {
 			mid = (low + high) / 2;
