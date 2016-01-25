@@ -5,7 +5,7 @@ public class WordDictionary {
     public WordDictionary() {
         root = new TrieNode();
     }
-
+    
     // Adds a word into the data structure.
     public void addWord(String word) {
         // Write your code here
@@ -29,16 +29,15 @@ public class WordDictionary {
         if (now.children.containsKey(c)) {
             if (index == word.length() - 1 && now.children.get(c).hasWord) {
                 return true;
+            } else {
+                return find(word, index + 1, now.children.get(c));
             }
-            return find(word, index + 1, now.children.get(c));
         } else if (c == '.') {
             boolean result = false;
             for (Map.Entry<Character, TrieNode> child : now.children.entrySet()) {
                 if (index == word.length() - 1 && child.getValue().hasWord) {
                     return true;
-                }
-                
-                if (find(word, index + 1, child.getValue())){
+                } else if (find(word, index + 1, child.getValue())){
                     result = true;
                 }
             }
@@ -47,16 +46,30 @@ public class WordDictionary {
             return false;
         }
     }
-
     
-    class TrieNode {
-        // Initialize your data structure here.
-        public HashMap<Character, TrieNode> children;
-        public boolean hasWord;
-        
-        // Initialize your data structure here.
-        public TrieNode() {
-            children = new HashMap<Character, TrieNode>();
-            hasWord = false;
-        }
-    } 
+    
+    // Returns if the word is in the data structure. A word could
+    // contain the dot character '.' to represent any one letter.
+    public boolean search(String word) {
+        // Write your code here
+        return find(word, 0, root);
+    }
+}
+
+class TrieNode {
+    // Initialize your data structure here.
+    public HashMap<Character, TrieNode> children;
+    public boolean hasWord;
+    
+    // Initialize your data structure here.
+    public TrieNode() {
+        children = new HashMap<Character, TrieNode>();
+        hasWord = false;
+    }
+}
+
+// Your WordDictionary object will be instantiated and called as such:
+// WordDictionary wordDictionary = new WordDictionary();
+// wordDictionary.addWord("word");
+// wordDictionary.search("pattern");
+
