@@ -1,20 +1,42 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
 public class Solution {
     /**
      * @paramn n: An integer
-     * @return: An integer
+     * @return: A list of root
      */
-    public int numTrees(int n) {
-        if (n < 0) {
-            return -1;
+    public List<TreeNode> generateTrees(int n) {
+        return helper(1, n);
+    }
+    private List<TreeNode> helper(int start, int end) {
+        List<TreeNode> result = new ArrayList<TreeNode>();
+        if (start > end) {
+            result.add(null);
+            return result;
         }
-        int[] count = new int[n + 2];
-        count[0] = 1;
-        count[1] = 1;
-        for (int i = 2; i <= n; i++) {
-            for (int j = 0; j < i; j++) {
-                count[i] += count[j] * count[i - j - 1];
+        
+        for (int i = start; i <= end; i++) {
+            List<TreeNode> leftNodes = helper(start, i - 1);
+            List<TreeNode> rightNodes = helper(i + 1, end);
+            
+            for (TreeNode leftNode : leftNodes) {
+                for (TreeNode rightNode : rightNodes) {
+                    TreeNode root = new TreeNode(i);
+                    root.left = leftNode;
+                    root.right = rightNode;
+                    result.add(root);
+                }
             }
         }
-        return count[n];
+        return result;
     }
 }
