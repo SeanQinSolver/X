@@ -13,18 +13,19 @@ public class Solution {
         helper(num, 0, target, list, result);
         return result;
     }
-    private void helper(int[] num, int start, int gap, 
-    List<Integer> list, List<List<Integer>> result) {
+    private void helper(int[] num, int start, int gap,
+                        List<Integer> list, List<List<Integer>> result) {
         if (gap == 0) {
             result.add(new ArrayList<Integer>(list));
             return;
         }
         
         for (int i = start; i < num.length; i++) {
+            //only count the first occurence of that number
             if (i != start && num[i] == num[i - 1]) {
                 continue;
             }
-            
+            //remove the number larger than gap
             if (gap < num[i]) {
                 return;
             }
@@ -36,4 +37,5 @@ public class Solution {
         }
         
     }    
+    
 }
