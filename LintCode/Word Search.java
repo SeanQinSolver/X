@@ -27,7 +27,6 @@ public class Solution {
         }
         if (board[i][j] == word.charAt(k)) {
             char temp = board[i][j];
-            //使用‘#’号更加快捷
             board[i][j] = '#';
             if (k == word.length() - 1) {
                 return true;
