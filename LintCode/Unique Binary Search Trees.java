@@ -18,3 +18,5 @@ public class Solution {
         return count[n];
     }
 }
+
+//dp
