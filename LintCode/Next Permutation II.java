@@ -41,3 +41,9 @@ public class Solution {
         nums[j] = temp;
     }
 }
+
+
+//此题关键是先找第一个nums[i] < nums[i+1]的。设leftIndex = i.
+//若index到头了还为1,则把全部翻转
+//再找第一个num[j] > num[leftIndex]，设置rightIndex = j
+//交换rightIndex与leftIndex，然后再翻转leftIndex + 1到头

@@ -85,3 +85,67 @@ public class Test {
         }
     }
 }
+
+//method2
+用Stack
+
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ * Definition for Doubly-ListNode.
+ * public class DoublyListNode {
+ *     int val;
+ *     DoublyListNode next, prev;
+ *     DoublyListNode(int val) {
+ *         this.val = val;
+ *         this.next = this.prev = null;
+ *     }
+ * }
+ */
+public class Solution {
+    /**
+     * @param root: The root of tree
+     * @return: the head of doubly list node
+     */
+    public DoublyListNode bstToDoublyList(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode node = root;
+        stack.push(node);
+        DoublyListNode dummy = new DoublyListNode(0);
+        DoublyListNode dNode = dummy;
+        while (!stack.isEmpty()) {
+            while (node != null && node.left != null) {
+                stack.push(node.left);
+                node = node.left;
+            }
+            node = stack.pop();
+            DoublyListNode curr = new DoublyListNode(node.val);
+            dNode.next = curr;
+            curr.prev = dNode;
+            dNode = dNode.next;
+            
+            //{2,3,#,4,#,5,#,6,#,7,#,8,#,9,#,11} 此处注意要强行node = node.right。
+            //在node等于9的时候，11-><-9为已连接的doublylinkedlist. 转到循环while(node != null && node.left != null)依然可以进入循环，则又把9的left 11 push到stack中，就一直上下上下的走
+            
+            node = node.right;
+            if (node != null) {
+                stack.push(node);
+            }
+        }
+        return dummy.next;
+    }
+}
+
+
+
+

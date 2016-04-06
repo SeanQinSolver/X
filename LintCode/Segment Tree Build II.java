@@ -27,8 +27,10 @@ public class Solution {
         SegmentTreeNode root = new SegmentTreeNode(start, end, Integer.MIN_VALUE);
         if (start != end) {
             int mid = (start + end) / 2;
-            root.left = helper(start, mid, array);
-            root.right = helper(mid + 1, end, array);
+            SegmentTreeNode left = helper(start, mid, A);
+            SegmentTreeNode right = helper(mid + 1, end, A);
+            root.left = left;
+            root.right = right;
             
             root.max = Math.max(root.left.max, root.right.max);
         } else {

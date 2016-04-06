@@ -29,3 +29,5 @@ public class Solution {
         return head.next;
     }
 }
+
+//注意此题使用point.next = head这种前面一个node来求解

@@ -31,3 +31,5 @@ public class Solution {
         }
     }
 }
+
+//注意一定要check是否left的value和right的value相等

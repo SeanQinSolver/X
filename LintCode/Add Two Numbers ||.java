@@ -51,3 +51,7 @@ public class Solution {
         return result;
     } 
 }
+
+//此题的重点是翻转两根LINKEDLIST，从首加到尾在翻转。加的时候有个carry来carry进位
+
+//进位注意判断value >= 10有个等于哈！

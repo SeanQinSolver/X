@@ -33,6 +33,9 @@ public class Solution {
         return distance + 1;
     }
 }
+
+//method1二次循环依次计算
+
 //method2
 
 public class Solution {
@@ -63,3 +66,6 @@ public class Solution {
         }
         return distance;
     }
+}
+
+//用j去追踪右边界。若超过s，则减去左边界继续运算

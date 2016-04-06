@@ -38,3 +38,6 @@ public class Solution {
         }
     }
 }
+
+
+//注意此题的最后recursion上面需要map.get(digits.charAt(sb.length())) 来获取每个数字对应的character list

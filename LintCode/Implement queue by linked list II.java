@@ -69,3 +69,35 @@ class LinkedListNode<Integer> {
         value = v;
     }
 }
+
+//Method2
+
+public class Dequeue {
+    LinkedList<Integer> list;
+    
+    public Dequeue() {
+        list = new LinkedList<Integer>();
+    }
+    
+    public void push_front(int item) {
+        list.addFirst(item);
+    }
+    
+    public void push_back(int item) {
+        list.addLast(item);
+    }
+    
+    public int pop_front() {
+        if (!list.isEmpty()) {
+            return list.removeFirst();
+        }
+        return -1;
+    }
+    
+    public int pop_back() {
+        if (!list.isEmpty()) {
+            return list.removeLast();
+        }
+        return -1;
+    }
+}

@@ -55,3 +55,6 @@ public class Solution {
         return count;
     }
 }
+
+
+//此题需要binary search两次，然后获取到leftIndex与rightIndex后求值

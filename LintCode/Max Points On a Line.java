@@ -44,3 +44,5 @@ public class Solution {
         return max;    
     }
 }
+
+//此题就是用hashmap存储斜率，斜率相同的累加。另注意重复的点累加起来dup。

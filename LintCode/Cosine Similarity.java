@@ -25,3 +25,5 @@ class Solution {
         return doProduct / (Math.sqrt(normA) * Math.sqrt(normB));
     }
 }
+
+//此题注意double还有最后运算的分母的括号

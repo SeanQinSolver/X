@@ -70,6 +70,13 @@ public class Top_K_Fequent_Words {
 		
 		
 	}
+    
+    上面的对调可封装成函数
+    private void exch(String[] A, int a, int b) {
+        String temp = A[a];
+        A[a] = A[b];
+        A[b] = temp;
+    }
 	
 	public static void main(String[] args) {
 		Top_K_Fequent_Words tkf = new Top_K_Fequent_Words();

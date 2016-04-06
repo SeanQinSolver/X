@@ -34,7 +34,7 @@ public class Solution {
     private int partition(String[] str, String pivot, NBComparator compare, int l, int u) {
         int m = l;
         for (int i = l + 1; i <= u; i++) {
-            if (compare.cmp(str[i], pivot) == -1 || compare.cmp(pivot, str[i]) == 1) {
+            if (compare.cmp(str[i], pivot) == -1 || compare.s(pivot, str[i]) == 1) {
                 m++;
                 swap(str, i, m);
             } else if (compare.cmp(str[i], pivot) == 0 || compare.cmp(pivot, str[i]) == 0) {
@@ -51,3 +51,5 @@ public class Solution {
         str[r] = temp;
     }
 };
+
+//难以理解的可能在partition部分，不仅需要使用compare.cmp(alist[i], pivot), 同时也需要使用compare.cmp(pivot, alist[i]), 否则答案有误。第二个在于alist[i] == pivot时，需要首先将其和alist[l]交换，因为i是从l+1开始处理的，将alist[l]换过来后可继续和 pivot 进行比较。在 while 循环退出后在将当前遍历到的小于 pivot 的元素 alist[m] 和 alist[l] 交换，此时基准元素正确归位。对这一块不是很清楚的举个例子就明白了。

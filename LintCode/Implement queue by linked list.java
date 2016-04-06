@@ -37,3 +37,24 @@ public class Queue {
         }
     }
 }
+
+//method2
+
+public class Queue {
+    
+    LinkedList<Integer> list;
+    public Queue() {
+        list = new LinkedList<Integer>();
+    }
+    
+    public void enqueue(int item) {
+        list.addLast(item);
+    }
+    
+    public int dequeue() {
+        if (!list.isEmpty()) {
+            return list.removeFirst();
+        }
+        return -1;
+    }
+}

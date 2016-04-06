@@ -62,3 +62,6 @@ public class Solution {
         return true;
     }
 }
+
+//此题注意的是search到最后要判断下now是否是最后一个,==》 wordEnd = true；
+//start with 只需要full cover即可

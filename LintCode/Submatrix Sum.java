@@ -36,3 +36,13 @@ public class Solution {
         return result;
     }
 }
+'
+
+//DP部分写法二，以SUM[][]为基数去计算
+
+
+for (int i = 1; i < sum.length; i++) {
+    for (int j = 1; j < sum[0].length; j++) {
+        sum[i][j] = matrix[i - 1][j - 1] + sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1];
+    }
+}
