@@ -41,6 +41,7 @@ public class Solution {
         if (start > end) {
             return null;
         }
+        //注意initalize的0L
         SegmentTreeNode root = new SegmentTreeNode(start, end, 0L);
         
         if (start != end) {
@@ -62,6 +63,7 @@ public class Solution {
             return root.sum;
         }
         Long leftSum = 0L, rightSum = 0L;
+        //注意此mid是root的start和end计算
         int mid = root.start + (root.end - root.start) / 2;
         
         if (start <= mid) {

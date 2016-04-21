@@ -1,34 +1,55 @@
-
 /**
- * Definition of TreeNode:
- * public class TreeNode {
- *     public int val;
- *     public TreeNode left, right;
- *     public TreeNode(int val) {
- *         this.val = val;
- *         this.left = this.right = null;
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
  *     }
  * }
  */
 public class Solution {
     /**
-     * @param root, the root of binary tree.
-     * @return true if it is a mirror of itself, or false.
+     * @param l1: the first list
+     * @param l2: the second list
+     * @return: the sum list of l1 and l2
      */
-    public boolean check(TreeNode left, TreeNode right) {
-        if (left == null && right == null) {
-            return true;
-        } else if (left == null || right == null) {
-            return false;
-        } else {
-            return left.val == right.val && check(left.left, right.right) && check(left.right, right.left);
-        }
+    public ListNode addLists(ListNode l1, ListNode l2) {
+        int carry = 0;
+        ListNode temp = helper(l1, l2, carry);
+        return temp;
     }
-    public boolean isSymmetric(TreeNode root) {
-        if (root == null) {
-            return true;
-        } else {
-            return check(root.left, root.right);
+    
+    //in this problem no need to reverse
+    public ListNode reverse(ListNode node) {
+        ListNode prev = null;
+        while (node != null) {
+            ListNode temp = node.next;
+            node.next = prev;
+            prev = node;
+            node = temp;
         }
+        return prev;
+    }
+    
+    public ListNode helper(ListNode l1, ListNode l2, int carry) {
+        if (l1 == null && l2 == null && carry == 0) {
+            return null;
+        }
+        
+        ListNode result = new ListNode(0);
+        
+        if (l1 != null) carry += l1.val;
+        if (l2 != null) carry += l2.val;
+        
+        result.val = carry % 10;
+        
+        if (l1 != null || l2 != null) {
+            ListNode nextNode = helper(l1 == null ? null : l1.next, l2 == null ? null : l2.next,
+                                       carry >= 10 ? 1 : 0);
+            result.next = nextNode;
+        }
+        return result;
     }
 }

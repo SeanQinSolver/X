@@ -19,7 +19,7 @@ public class Solution {
 			return Integer.MIN_VALUE;
 		}
 		if (dividend == Integer.MAX_VALUE && divisor == -1) {
-			return Integer.MIN_VALUE;
+			return Integer.MIN_VALUE + 1;
 		}
 		if (dividend == Integer.MAX_VALUE && divisor == 1) {
 		    return Integer.MAX_VALUE;
@@ -41,3 +41,6 @@ public class Solution {
         
     }
 }
+
+
+//此题注意每一个shift每次循环的时候都要重置

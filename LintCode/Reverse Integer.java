@@ -19,3 +19,5 @@ public class Solution {
         return rst;
     }
 }
+
+//此题注意Overflow问题，判断是rst_next / 10 != rst

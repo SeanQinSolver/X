@@ -28,19 +28,24 @@ public class Solution {
         int mid = root.start + (root.end - root.start) / 2;
         int leftSum = 0;
         int rightSum = 0;
+        //对称1
         if (start <= mid) {
-            if (end < mid) {
-                leftSum = query(root.left, start, end);
+            //对称2
+            if (mid <= end) {
+                leftCount = query(root.left, start, mid);
             } else {
-                leftSum = query(root.left, start, mid);
+                leftCount= query(root.left, start, end);
             }
         }
-        if (end > mid) {
-            if (start > mid) {
-                rightSum = query(root.right, start, end);
+        //对称1
+        if (mid <= end) {
+            //对称2
+            if (start <= mid) {
+                rightCount = query(root.right, mid + 1, end);
             } else {
-                rightSum = query(root.right, mid + 1, end);
+                rightCount = query(root.right, start, end);
             }
+            
         }
         
         return leftSum + rightSum;

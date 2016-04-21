@@ -16,6 +16,6 @@ class Solution {
            //如果大于31的话，只管起始的i
            mask = (1 << i) - 1;
        }
-       return (mask & n) | (m << i);
+       return (mask & n) | (m << i); 
     }
 }

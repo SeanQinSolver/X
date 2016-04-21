@@ -81,9 +81,8 @@ public class Solution {
         
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        head = dummy;
         
-        ListNode tail = dummy;
+        ListNode tail = head;
         for(int i = 0; i < n; i++) {
             head = head.next;
         }

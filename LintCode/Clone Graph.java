@@ -52,3 +52,19 @@ public class Solution {
  *解法先复制各个node，以map来判断是否已经复制了。再把各node的neighbor加上
  *
  */
+
+
+//写法2
+
+//加关系
+
+    for (int i = 0; i < list.size(); i++) {
+        UndirectedGraphNode temp = map.get(list.get(i));
+        ArrayList<UndirectedGraphNode> neighborTemp = new ArrayList<UndirectedGraphNode>();
+            for (UndirectedGraphNode temp2 : list.get(i).neighbors) {
+                neighborTemp.add(map.get(temp2));
+            }
+        temp.neighbors = neighborTemp;
+    }
+    return map.get(node);
+}

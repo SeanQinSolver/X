@@ -41,3 +41,5 @@ public class Solution {
         return result;
     }
 }
+
+//此题注意在循环进入的第一时要判断是否n == 1此时为最后一个，则直接赋值退出

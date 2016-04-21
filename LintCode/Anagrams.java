@@ -19,6 +19,7 @@ public class Solution {
                 }
             }
             if (!visited[i] && hasAnagram) {
+                visited[i] = true;
                 result.add(strs[i]);
             }
         }

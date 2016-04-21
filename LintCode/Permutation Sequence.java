@@ -53,3 +53,46 @@ class Solution {
 // 然后，新的k就可以有k%(n-1)!获得。循环n次即可。
 
 //  同时，为了可以跟数组坐标对其，令k先--。
+
+//和题 Permutation Index 正好相反，这里给定第几个排列的相对排名，输出排列值。和不同进制之间的转化类似，这里的『进制』为1!, 2!..., 以n=3, k=4为例，我们从高位到低位转化，直觉应该是用 k/(n-1)!, 但以 n=3,k=5 和 n=3,k=6 代入计算后发现边界处理起来不太方便，故我们可以尝试将 k 减1进行运算，后面的基准也随之变化。第一个数可以通过(k-1)/(n-1)!进行计算，那么第二个数呢？联想不同进制数之间的转化，我们可以通过求模运算求得下一个数的k-1, 那么下一个数可通过(k2 - 1)/(n-2)!求得，这里不理解的可以通过进制转换类比进行理解。和减掉相应的阶乘值是等价的。
+
+//method2
+
+class Solution {
+    /**
+     * @param n: n
+     * @param k: the kth permutation
+     * @return: return the k-th permutation
+     */
+    public String getPermutation(int n, int k) {
+        List<Integer> numList = new ArrayList<Integer>();
+        int fac = 1;
+        for (int i = 1; i <= n; i++) {
+            fac *= i;
+            numList.add(i);
+        }
+        StringBuilder res = new StringBuilder();
+        k -= 1;
+        fac /= n;
+        for (int i = n - 1; i >= 0; i--) {
+            int indexInList = k / fac;
+            //System.out.println(indexInList)
+            res.append(numList.get(indexInList));
+            numList.remove(indexInList);
+            
+            k = k % fac;
+            if (i != 0) {
+                fac = fac / i;
+            }
+        }
+        return numList.toString();
+    }
+}
+
+//times = n - 1;或者循环从for(int i = n-1; i >= 0; i--)
+//k = k - 1;
+//此题的重点 numInList = k % factorial; 确定
+//k = k % factorial
+//factorial = factorial / times
+//times--
+

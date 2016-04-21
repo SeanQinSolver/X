@@ -36,3 +36,41 @@ public class Solution {
         return canSegment[s.length()];
     }
 }
+
+
+//写法2
+
+public class Solution {
+    /**
+     * @param s: A string s
+     * @param dict: A dictionary of words dict
+     */
+    
+    
+    public boolean wordBreak(String s, Set<String> dict) {
+        if (s == null || s.length() == 0) {
+            return true;
+        }
+        int maxLen = Integer.MIN_VALUE;
+        for (String sx : dict) {
+            maxLen = Math.max(maxLen, sx.length());
+        }
+        
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (i -  j > maxLen) break;
+                
+                String temp = s.substring(j, i);
+                if (dp[j] && dict.contains(temp)) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+}
+

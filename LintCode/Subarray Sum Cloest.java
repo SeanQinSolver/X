@@ -51,3 +51,66 @@ public class Solution {
         return res;
     }
 }
+
+//写法2,sums不用intialize成nums.length + 1
+
+
+
+class Pair {
+    int sum;
+    int index;
+    public Pair(int sum, int index) {
+        this.sum = sum;
+        this.index = index;
+    }
+}
+
+
+public class Solution {
+    
+    
+    public int[] subarraySumClosest(int[] nums) {
+        int[] result = new int[2];
+        
+        if (nums == null || nums.length == 0) return result;
+        if (nums.length == 1) {
+            result[0] = result[1] = 0;
+            return result;
+        }
+        
+        Pair[] pairs = new Pair[nums.length];
+        int prev = nums[0];
+        pairs[0] = new Pair(nums[0], 0);
+        for (int i = 1;  i < nums.length; i++) {
+            pairs[i] = new Pair(nums[i] + prev, i);
+            prev = pairs[i].sum;
+        }
+        
+        Comparator<Pair> comp = new Comparator<Pair>() {
+            @Override
+            public int compare(Pair p1, Pair p2) {
+                return p1.sum - p2.sum;
+            }
+        };
+        
+        Arrays.sort(pairs, comp);
+        
+        int ans = Integer.MAX_VALUE;
+        int temp1 = 0;
+        int temp2 = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (ans > pairs[i].sum - pairs[i - 1].sum) {
+                ans = pairs[i].sum - pairs[i - 1].sum;
+                temp1 = pairs[i].index;
+                temp2 = pairs[i - 1].index;
+            }
+        }
+        
+        int[] temp = new int[]{temp1, temp2};
+        Arrays.sort(temp);
+        result[0] = temp[0] + 1;
+        result[1] = temp[1];
+        return result;
+    }
+}
+

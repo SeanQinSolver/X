@@ -8,19 +8,19 @@ class Solution {
         if (n == 1) {
             return a % b;
         } else if (n == 0) {
-            return  1 % b;
+            //注意此时b == 1时得 1 % b == 0所以只能用1 % b而不直接return 1
+            return 1 % b;
         } else if (n < 0) {
             return -1;
         }
         
-        long product = fastPower(a, b, n / 2);
-        product = (product * product) % b;
-        //如果a是奇数个数的话
+        int result = fastPower(a, b, n / 2);
+        result = (result * result) % b;
         if (n % 2 == 1) {
-            product = (product * a) % b;
+            result = (result * a) % b;
         }
-        
-        return (int)product;
-        
+        return result;
     }
 };
+
+// a10%3 equals (a5%3 * a5%3) % 3;

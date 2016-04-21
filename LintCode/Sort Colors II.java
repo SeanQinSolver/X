@@ -44,3 +44,40 @@ class Solution {
         A[b] = temp;
     }
 }
+
+
+//merge sort
+
+class Solution {
+    /**
+     * @param colors: A list of integer
+     * @param k: An integer
+     * @return: nothing
+     */
+    public void sortColors2(int[] colors, int k) {
+        int[] Aux = new int[colors.length];
+        sort(0, colors.length - 1, colors, Aux);
+    }
+    
+    private void merge(int lo, int hi, int mid, int[] A, int[] Aux) {
+        for (int i = lo; i <= hi; i++) {
+            Aux[i] = A[i];
+        }
+        
+        int i = lo, j = mid + 1;
+        for (int k = lo; k <= hi; k++) {
+            if (i > mid) A[k] = Aux[j++];
+            else if (j > hi) A[k] = Aux[i++];
+            else if (Aux[j] < Aux[i]) A[k] = A[j++];
+            else A[k] = Aux[i++];
+        }
+    }
+    
+    private void sort(int lo, int hi, int[] A, int[] Aux) {
+        if (hi <= lo) return;
+        int mid = lo + (hi - lo) / 2;
+        sort(lo, mid, A, Aux);
+        sort(mid + 1, hi, A, Aux);
+        merge(lo, hi, mid, A, Aux);
+    }
+}
