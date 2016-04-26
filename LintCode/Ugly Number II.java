@@ -34,6 +34,7 @@ class Solution {
     }
 };
 
+//注意count < n
 
 
 //method2

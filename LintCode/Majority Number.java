@@ -40,7 +40,7 @@ public class Solution {
         for (Integer num : nums) {
             if (map.containsKey(num)) {
                 map.put(num, map.get(num) + 1);
-                if (map.get(num) * 2 > nums.length) {
+                if (map.get(num) * 2 > nums.size()) {
                     return map.get(num);
                 }
                 continue;

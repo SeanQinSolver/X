@@ -50,7 +50,7 @@ public class Solution {
 public class Solution {
     public ArrayList<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<INteger>();
-        if (root == null) {
+        if (root != null) {
             List<Integer> left = postorderTraversal(root.left);
             result.addAll(left);
             List<integer> right = postorderTraversal(root.right);

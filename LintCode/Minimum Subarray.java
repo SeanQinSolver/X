@@ -5,7 +5,7 @@ public class Solution {
      */
     public int minSubArray(ArrayList<Integer> nums) {
         int sum = 0;
-        int maxSum = 0;
+        int maxSum = Integer.MIN_VALUE;
         int minSum = Integer.MAX_VALUE;
         for (int num : nums) {
             maxSum = Math.max(maxSum, sum);
