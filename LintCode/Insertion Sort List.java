@@ -8,7 +8,9 @@
  *         this.next = null;
  *     }
  * }
- */ 
+ */
+//method best runntime O(n)
+
 public class Solution {
     /**
      * @param head: The first node of linked list.
@@ -40,7 +42,7 @@ public class Solution {
 
 
 //Method2 时间复杂度N2, 空间复杂度O(1)
-
+//这种方法是temp为指针重新连接并构建Linkedlist，内部每次都要从dummy开始遍历
 public ListNode insertionSortList(ListNode head) {
     ListNode dummy = new ListNode(0);
     ListNode cur = head;

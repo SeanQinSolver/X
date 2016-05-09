@@ -9,7 +9,7 @@ public class Solution {
         if (A == null || A.length == 0) return true;
         
         int index_true = A.length - 1;
-        for (int i = A.length - 1; i >=0; i--) {
+        for (int i = A.length - 2; i >=0; i--) {
             if (i + A[i] >= index_true) {
                 index_true = i;
             }

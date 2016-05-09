@@ -18,7 +18,7 @@ public class Solution {
         if (gap == 0)
         {
             result.add(new ArrayList<Integer>(list));
-            return;∂
+            return;
         }
         
         if (gap < 0) {

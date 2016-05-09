@@ -50,9 +50,6 @@ public class Solution {
      * @param triangle: a list of lists of integers.
      * @return: An integer, minimum path sum.
      */
-    
-    
-    
     public int minimumTotal(int[][] triangle) {
         if (triangle == null || triangle.length == 0 || triangle[0].length == 0) {
             return -1;
@@ -61,9 +58,11 @@ public class Solution {
         int len = triangle.length;
         int[][] dp = new int[len][len];
         
+        //最后一层的数据
         for (int i = 0; i < len; i++) {
             dp[len - 1][i] = triangle[len - 1][i];
         }
+        
         //从倒数第二行开始
         for (int i = len - 2; i >= 0; i--) {
             for (int j = 0; j <= i; j++) {
@@ -74,3 +73,25 @@ public class Solution {
     }
 }
 
+//dp List<List<Integer>>
+
+public class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        if (triangle == null || triangle.size() == 0 || triangle.get(0).size() == 0) {
+            return 0;
+        }
+        int size = triangle.size();
+        int[] dp = new int[size];
+        
+        for (int i = 0; i < triangle.get(size - 1).size(); i++) {
+            dp[i] = triangle.get(size - 1).get(i);
+        }
+        
+        for (int i = size - 2; i >= 0; i--) {
+            for (int j = 0; j < triangle.get(i).size(); j++) {
+                dp[j] = Math.min(dp[j], dp[j + 1]) + triangle.get(i).get(j);
+            }
+        }
+        return dp[0];
+    }
+}

@@ -59,3 +59,90 @@ public class Solution {
         return dummy.next;
     }
 }
+
+//Quict sort1
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode leftDummy = new ListNode(0);
+        ListNode leftMove = leftDummy;
+        ListNode rightDummy = new ListNode(0);
+        ListNode rightMove = rightDummy;
+        ListNode middleDummy = new ListNode(0);
+        ListNode middleMove = middleDummy;
+        
+        ListNode mid = findMid(head);
+        
+        while (head != null) {
+            if (head.val < mid.val) {
+                leftMove.next = head;
+                leftMove = leftMove.next;
+            } else if (head.val > mid.val) {
+                rightMove.next = head;
+                rightMove = rightMove.next;
+            } else {
+                middleMove.next = head;
+                middleMove = middleMove.next;
+            }
+            head = head.next;
+        }
+        
+        leftMove.next = null;
+        rightMove.next = null;
+        middleMove.next = null;
+        
+        
+        ListNode left = sortList(leftDummy.next);
+        ListNode right = sortList(rightDummy.next);
+        
+        return concate(left, middleDummy.next, right);
+        
+    }
+
+    private ListNode concate(ListNode t1, ListNode t2, ListNode t3) {
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        tail.next = t1;
+        tail = getTail(tail);
+        tail.next = t2;
+        tail = getTail(tail);
+        tail.next = t3;
+        
+        return dummy.next;
+    }
+    
+    private ListNode getTail(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        while (head.next != null) {
+            head = head.next;
+        }
+        return head;
+    }
+    
+    private ListNode findMid(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
+
+//Quict sort2
+
+

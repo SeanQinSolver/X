@@ -28,4 +28,5 @@ public class Solution {
     }
     
 }
-//思路，向前，向下减一看有没有在set里面。空间换时间。
+//思路，向前，向后减一看有没有在set里面。空间换时间。
+//有点manacher algorithm的样子

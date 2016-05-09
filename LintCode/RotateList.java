@@ -75,7 +75,8 @@ public class Solution {
     public ListNode rotateRight(ListNode head, int n) {
         if (head == null) {
             return null;
-        }   
+        }
+        //需要先算length
         int length = getLength(head);
         n = n % length;
         

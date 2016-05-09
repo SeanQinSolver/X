@@ -28,7 +28,7 @@ public class Solution {
             if (compare(c1, d1)) {
                return isMatch(s.substring(1), p) || isMatch(s, p.substring(2)); 
             } else {
-            //s与p不相等，p跳到第2位继续皮椒
+            //s与p不相等，p跳到第2位继续比较
                 return isMatch(s, p.substring(2));
             }
         } else {

@@ -13,24 +13,28 @@ public class Solution {
      * @return an integer
      */
     public int maxPoints(Point[] points) {
-        if (points == null || points.length == 0) {
-            return 0;
-        }
+        if (points == null || points.length == 0)  return 0;
+        
         HashMap<Double, Integer> map = new HashMap<Double, Integer>();
         int max = 1;
         
         for (int i = 0; i < points.length; i++) {
             map.clear();
-            map.put((double)Integer.MIN_VALUE, 1);
-            int dup = 0;
+            //注意此点需要先加入一个value。如果是[0,0] [0,0]的话那么map为空，下面的for(int temp : map.values)就进不去
+            map.put((double)Integer.MAX_VALUE, 1);
+            int count = 0;
             for (int j = i + 1; j < points.length; j++) {
-                if (points[j].x == points[i].x && points[j].y == points[i].y) {
-                    dup++;
+                if (points[i].x == points[j].x && points[i].y == points[j].y) {
+                    count++;
                     continue;
                 }
                 
-                double key = points[j].x - points[i].x == 0 ? Integer.MAX_VALUE : (double)(points[j].y - points[i].y) / (double)(points[j].x - points[i].x);
-                
+                double key = points[i].x - points[j].x == 0 ? Integer.MAX_VALUE : (double)(points[i].y - points[j].y) / (double)(points[i].x - points[j].x);
+                //注意此点可能会有-0.0要变成0.0
+                if (key == -0.0) {
+                    key = Math.abs(key);
+                }
+                //key = Math.abs(key);
                 if (map.containsKey(key)) {
                     map.put(key, map.get(key) + 1);
                 } else {
@@ -38,10 +42,10 @@ public class Solution {
                 }
             }
             for (int temp : map.values()) {
-                max = Math.max((temp + dup), max);
+                max = Math.max(temp + count, max);
             }
         }
-        return max;    
+        return max;
     }
 }
 

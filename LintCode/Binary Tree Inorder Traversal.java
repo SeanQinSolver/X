@@ -66,3 +66,6 @@ public class Solution {
         return result;
     }
 }
+
+//pre-order的node可以先在循环外添加到stack中
+//in-order最好在循环中加入

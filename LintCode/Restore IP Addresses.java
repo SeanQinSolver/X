@@ -15,6 +15,7 @@ public class Solution {
     }
     
     private void helper(ArrayList<String> result, ArrayList<String> list, String s, int start) {
+        //写法2 if (path.size() == 4 && start == s.length())
         if (list.size() == 4) {
             if (start != s.length()) {
                 System.out.println("hah")

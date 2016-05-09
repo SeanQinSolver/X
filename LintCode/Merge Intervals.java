@@ -37,10 +37,10 @@ class Solution {
     }
     
     private Comparator<Interval> comp = new Comparator<Interval>(){
-    public int compare(Interval i1, Interval i2) {
-    return i1.start - i2.start;
-}
-};
+        public int compare(Interval i1, Interval i2) {
+                return i1.start - i2.start;
+        }
+    };
 }
 
 

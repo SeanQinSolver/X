@@ -38,4 +38,27 @@ public class Solution {
     }
 }
 
-//
+//d3:
+public class Solution {
+    /**
+     * @param n: An integer
+     * @return: An integer
+     */
+    public int climbStairs(int n) {
+        // write your code here
+        if (n <= 1) {
+            return 1;
+        }
+        int a = 1;
+        int b = 1;
+        
+        int c = 0;
+        
+        for (int i = 2; i <= n; i++) {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        return c;
+    }
+}

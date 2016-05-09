@@ -41,10 +41,10 @@ class Solution {
     }
     private void search(int n, ArrayList<Integer> cols, ArrayList<ArrayList<String>> result) {
         if (cols.size() == n) {
-            for (int i : cols) {
-                System.out.print(i + " ");
-            }
-            System.out.print("**");
+//            for (int i : cols) {
+//                System.out.print(i + " ");
+//            }
+//            System.out.print("**");
             result.add(drawCheckboard(cols));
         }
         for (int col = 0; col < n; col++) {

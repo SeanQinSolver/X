@@ -23,12 +23,13 @@ public class Solution {
             isPalindrome[i][i + 1] = (s.charAt(i) == s.charAt(i + 1));
         }
         //从区间为2的开始判断是否为回文串
+        //length为区间
         for (int length = 2; length < s.length(); length++) {
             for (int start = 0; start + length < s.length(); start++) {
                 isPalindrome[start][start + length] = isPalindrome[start + 1][start + length - 1] && s.charAt(start) == s.charAt(start + length);
             }
         }
-        return iPalindrome;
+        return isPalindrome;
     }
     
     public int minCut(String s) {
@@ -39,7 +40,7 @@ public class Solution {
         //preparation
         boolean[][] isPalindrome = getIsPalindrome(s);
         
-        //initialize 至少要切多少刀
+        //initialize 至少要切多少刀就是全部切成单个字符串
         int[] f = new int[s.length() + 1]; //保留第0个位置
         for (int i = 0; i <= s.length(); i++) {
             f[i] = i - 1;
