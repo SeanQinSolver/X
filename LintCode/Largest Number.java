@@ -1,3 +1,4 @@
+//method1
 public class Solution {
     /**
      *@param num: A list of non negative integers
@@ -37,5 +38,44 @@ public class Solution {
             return "0";
         }
         return tempRes;
+    }
+}
+
+
+//写法2
+
+public class Solution {
+    public String largestNumber(int[] nums) {
+        if (nums == null || nums.length == 0) return "";
+        int len = nums.length;
+        
+        String[] array = new String[len];
+        
+        for (int i = 0; i < nums.length; i++) {
+            array[i] = String.valueOf(nums[i]);
+        }
+        
+        Comparator<String> comp = new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                return (s2 + s1).compareTo(s1 + s2);
+            }
+        };
+        
+        Arrays.sort(array, comp);
+        
+        StringBuilder sb = new StringBuilder();
+        for (String s : array) {
+            sb.append(s);
+        }
+        String result = sb.toString();
+        
+        int count = 0;
+        for (int i = 0; i < result.length(); i++) {
+            if (result.charAt(i) != '0') break;
+            count++;
+        }
+        result = (count == result.length()) ? "0" : result;
+        return result;
     }
 }

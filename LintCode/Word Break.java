@@ -1,40 +1,36 @@
 public class Solution {
-    /**
-     * @param s: A string s
-     * @param dict: A dictionary of words dict
-     */
-    
-    private int getMaxLength(Set<String> dict) {
-        int maxLength = 0;
-        for (String word : dict) {
-            maxLength = Math.max(maxLength, word.length());
-        }
-        return maxLength;
-    }
-    public boolean wordBreak(String s, Set<String> dict) {
-        if (s == null || s.length() == 0) {
-            return true;
-        }
+    public boolean wordBreak(String s, Set<String> wordDict) {
+        if (s == null || s.length() == 0) return true;
         
-        int maxLength = getMaxLength(dict);
-        boolean[] canSegment = new boolean[s.length() +  1];
+        int maxLen = getMaxLen(wordDict);
         
-        canSegment[0] = true;
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        
+        
         for (int i = 1; i <= s.length(); i++) {
-            canSegment[i] = false;
-            for (int lastWordLength = 1; lastWordLength <= maxLength && lastWordLength <= i; lastWordLength++) {
-                if (!canSegment[i - lastWordLength]) {
-                    continue;
-                }
-                String word = s.substring(i - lastWordLength, i);
-                if (dict.contains(word)) {
-                    canSegment[i] = true;
+            //dp[i] = false;
+            for (int currentLen = 1; currentLen <= maxLen && currentLen <= i; currentLen++) {
+                if (!dp[i - currentLen]) continue;
+                
+                String temp = s.substring(i - currentLen, i);
+                if (wordDict.contains(temp)) {
+                    dp[i] = true;
                     break;
                 }
             }
         }
-        return canSegment[s.length()];
+        return dp[s.length()];
     }
+    
+    private int getMaxLen(Set<String> wordsDict) {
+        int len = Integer.MIN_VALUE;
+        for(String s : wordsDict) {
+            len = Math.max(len, s.length());
+        }
+        return len;
+    }
+    
 }
 
 
@@ -61,8 +57,9 @@ public class Solution {
         
         for (int i = 1; i <= s.length(); i++) {
             for (int j = i - 1; j >= 0; j--) {
+                 //j到i的距离切成字
                 if (i -  j > maxLen) break;
-                
+                if (!dp[j]) continue;
                 String temp = s.substring(j, i);
                 if (dp[j] && dict.contains(temp)) {
                     dp[i] = true;

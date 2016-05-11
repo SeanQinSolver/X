@@ -40,6 +40,48 @@ public class Solution {
     }
 }
 
+//method1 写法2, 在copy的时候不copy原来的random指针。在重新遍历的时候再copy
+
+/**
+ * Definition for singly-linked list with a random pointer.
+ * class RandomListNode {
+ *     int label;
+ *     RandomListNode next, random;
+ *     RandomListNode(int x) { this.label = x; }
+ * };
+ */
+public class Solution {
+    public RandomListNode copyRandomList(RandomListNode head) {
+        
+        
+        RandomListNode dummy = new RandomListNode(0);
+        RandomListNode move = dummy;
+        Map<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
+        
+        
+        RandomListNode point = head;
+        
+        while (point != null) {
+            RandomListNode newNode = new RandomListNode(point.label);
+            move.next = newNode;
+            map.put(point, newNode);
+            point = point.next;
+            move = newNode;
+        }
+        
+        point = head;
+        
+        while (point != null) {
+            if (point.random != null) {
+                RandomListNode temp = map.get(point);
+                temp.random = map.get(point.random);
+            }
+            point = point.next;
+        }
+        return dummy.next;
+    }
+}
+
 
 //method2, 用hashmap判断一次
 
@@ -68,8 +110,8 @@ public class Solution {
         
         while (head != null) {
             RandomListNode newNode = null;
-            if (map.containsKey(newNode)) {
-                newNode = map.get(head.label);
+            if (map.containsKey(head)) {
+                newNode = map.get(head);
             } else {
                 newNode = new RandomListNode(head.label);
                 map.put(head, newNode);
@@ -89,5 +131,57 @@ public class Solution {
             curr = curr.next;
         }
         return dummy.next;
+    }
+}
+
+
+//method3 不用hashmap 原地复制3次遍历
+
+/**
+ * Definition for singly-linked list with a random pointer.
+ * class RandomListNode {
+ *     int label;
+ *     RandomListNode next, random;
+ *     RandomListNode(int x) { this.label = x; }
+ * };
+ */
+public class Solution {
+    public RandomListNode copyRandomList(RandomListNode head) {
+        if (head == null) return null;
+        
+        RandomListNode dummy = new RandomListNode(0);
+        RandomListNode point = dummy;
+        
+        RandomListNode move = head;
+        //复制node 1->1‘->2->2’->3->3'
+        while (move != null) {
+            RandomListNode newNode = new RandomListNode(move.label);
+            newNode.next = move.next;
+            move.next = newNode;
+            move = move.next.next;
+        }
+        
+        move = head;
+        while (move != null) {
+            if (move.random != null) {
+                RandomListNode random1 = move.random;
+                move.next.random = random1.next;
+            }
+            move = move.next.next;
+        }
+        
+        //注意此点的交叉fuyuan.细读下面的代码
+        RandomListNode dummy1 = head.next;
+        move = head;
+        
+        while (move != null) {
+            RandomListNode newNode = move.next;
+            move.next = move.next.next;
+            move = move.next;
+            if (newNode.next != null) {
+                newNode.next = newNode.next.next;
+            }
+        }
+        return dummy1;
     }
 }

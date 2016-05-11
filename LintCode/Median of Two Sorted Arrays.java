@@ -35,7 +35,8 @@ public class Solution {
         }
     }
 }
-
+Time O(m + n).
+Space O(m + n).
 
 //solution2 merge with space optimization
 
@@ -98,8 +99,10 @@ public class Solution {
     }
 }
 
+Time O(m + n)
+Space O(1)
 //method3
-
+//binary search
 public class Solution {
     public double findMedianSortedArrays(int[] A, int[] B) {
         if ((A == null || A.length == 0) && (B == null || B.length == 0)) return -1.0;
@@ -150,6 +153,7 @@ public class Solution {
     }
 }
 
+O(log(m + n))
 
 题中已有信息两个数组均为有序，找中位数的关键在于找到第一半大的数，显然可以使用二分搜索优化。本题是找中位数，其实可以泛化为一般的找第 k 大数，这个辅助方法的实现非常有意义！在两个数组中找第k大数->找中位数即为找第k大数的一个特殊情况——第(A.length + B.length) / 2 大数。因此首先需要解决找第k大数的问题。这个联想确实有点牵强...+
 

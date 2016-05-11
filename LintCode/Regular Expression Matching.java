@@ -1,3 +1,7 @@
+//method1 DP
+
+
+
 public class Solution {
     /**
      * @param s: A string 
@@ -25,6 +29,10 @@ public class Solution {
         //如果Pattern第二位是‘*’
         if (d2 == '*') {
             //s与p的第一位都相等或者p第一位为‘.’
+            //fork here: 1. consume the character, and use the same pattern again.
+            //2. keep the character, and skip 'd1*' pattern
+            
+            //Here is also an opportunity to use DP, but the idea is the same
             if (compare(c1, d1)) {
                return isMatch(s.substring(1), p) || isMatch(s, p.substring(2)); 
             } else {
