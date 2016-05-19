@@ -43,3 +43,29 @@ public class Solution {
 }
 
 //使用两个key来存储最多的两个数
+
+
+//LEETCODE 求所有出现次数大于1/3的数
+
+public class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        List<Integer> rst = new ArrayList<Integer>();
+        
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        for (int i : nums) {
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+            } else {
+                map.put(i, 1);
+            }
+        }
+        
+        int k = nums.length / 3;
+        
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > k) rst.add(entry.getKey());
+        }
+        return rst;
+    }
+}

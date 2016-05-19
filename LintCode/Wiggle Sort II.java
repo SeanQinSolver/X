@@ -1,3 +1,4 @@
+//
 public class Solution {
     /**
      * @param nums a list of integer
@@ -57,3 +58,5 @@ public class Solution {
     }
 }
 //o(n) and extra o(n) space
+
+//method3 wiggle sort3 with quick sort method find the medium first

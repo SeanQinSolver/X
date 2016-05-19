@@ -11,6 +11,7 @@ public class Solution {
         if (num == null || num.length == 0) return 0;
         int n = num.length;
         
+        //也可以设置dp长度为n，然后dp[0] = num[0], dp[1] = num[1]
         long[] dp = new long[n + 1];
 
         dp[0] = 0;

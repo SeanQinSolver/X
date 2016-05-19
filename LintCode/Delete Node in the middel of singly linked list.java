@@ -24,3 +24,17 @@ public class Solution {
         node.next = temp;
     }
 }
+
+//写法2
+
+public class Solution {
+    public void deleteNode(ListNode node) {
+        if (node.next == null) {
+            node = null;
+        }
+        
+        ListNode next = node.next;
+        node.val = next.val;
+        node.next = node.next.next;
+    }
+}

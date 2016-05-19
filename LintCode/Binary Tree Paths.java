@@ -27,6 +27,7 @@ public class Solution {
         if (root.left == null && root.right == null) {
             result.add(s);
         }
+        //注意此点的s的操作要在方法里直接调用，不然s的值会变化
         if (root.left != null) {
             helper(root.left, result, s + "->" + root.left.val);
         }
