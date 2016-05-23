@@ -57,6 +57,7 @@ public class Solution {
                 A[A[i] - 1] = A[i];
                 A[i] = temp;
             }
+            
         }
         
         for (int i = 0; i < len; i++) {

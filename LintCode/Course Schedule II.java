@@ -71,7 +71,7 @@ public class Solution {
             }
         }
         
-        
+        //写法1 dfs------------
         int[] rst = new int[numCourses];
         int count = 0;
         while (!queue.isEmpty()) {
@@ -84,6 +84,21 @@ public class Solution {
             }
             rst[count++] = temp;
         }
+        //--------------------
+        
+        //写法2. bfs + dfs-----
+        while (!queue.isEmpty()) {
+            int sizeTemp = queue.size();
+            for (int i = 0; i < sizeTemp; i++) {
+                int temp = queue.poll();
+                for (int x : list.get(temp)) {
+                    countVertex[x]--;
+                    if (countVertex[x] == 0) queue.offer(x);
+                }
+                rst[count++] = temp;
+            }
+        }
+        //--------------------
         
         if (count == numCourses) return rst;
         return new int[0];
