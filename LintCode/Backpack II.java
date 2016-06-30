@@ -5,24 +5,24 @@ public class Solution {
      * @return: The maximum value
      */
     public int backPackII(int m, int[] A, int V[]) {
-        if (A == null || V == null || A.length == 0 || V.length == 0){
-            return 0;
-        }
-        int N = A.length;
-        int M = m;
-        int[][] bp = new int[N + 1][M + 1];
-        //i为size
+        if (A == null || V == null || A.length == 0 || V.length == 0) return 0;
+        int N = A.length; // size array
+        int M = m; //size limit
+        //dp[i][j]表示在前i个物品在体积Limit j的情况下的最大值；
+        int[][] dp = new int[N + 1][M + 1];
+        
         for (int i = 0; i < N; i++) {
-            //j为value
             for (int j = 0; j <= M; j++) {
                 if (A[i] > j) {
-                    bp[i + 1][j] = bp[i][j];
+                    //超过体积限制
+                    dp[i + 1][j] = dp[i][j];
                 } else {
-                    bp[i + 1][j] = Math.max(bp[i][j], bp[i][j - A[i]] + V[i]);
+                    //没有超过
+                    dp[i + 1][j] = Math.max(dp[i][j], dp[i][j - A[i]] + V[i]);
                 }
             }
         }
-        return bp[N][M];
+        return dp[N][M];
     }
 }
 

@@ -17,30 +17,36 @@ public class Solution {
         boolean flag = false;
         
         for (int i = 0; i <= lens; i++) {
+            //flag 可以去掉，这里事贪心的思维
             flag = false;
             for (int j = 0; j <= lenp; j++) {
-                
+                //s and p both empty
                 if (i == 0 && j == 0) {
                     dp[i][j] = true;
                     flag = true;
                     continue;
                 }
-                
+                //p is empty
                 if (j == 0) {
                     dp[i][j] = false;
                     continue;
                 }
                 
                 if (i == 0) {
+                    //s is empty but p is not empty
                     dp[i][j] = dp[i][j - 1] && p.charAt(j - 1) == '*';
                 } else {
+                    //s and p both is not empty
+                    //匹配一个或者多个
                     dp[i][j] = (compare(s.charAt(i - 1), p.charAt(j - 1)) && dp[i - 1][j - 1]) || (p.charAt(j - 1) == '*' && (dp[i][j - 1] || dp[i - 1][j]));
                 }
-                
+                //flag 可以去掉，这里事贪心的思维
                 if (dp[i][j]) flag = true;
                 
+                //greedy already reach at Lenp and j - 1 is *
                 if (dp[i][j] && p.charAt(j - 1) == '*' && j == lenp) return true;
             }
+            //flag 可以去掉，这里事贪心的思维
             if (!flag) return false;
         }
         return dp[lens][lenp];

@@ -1,3 +1,4 @@
+//method1 注意method3
 class Solution {
     /**
      * @param colors: A list of integer
@@ -79,5 +80,48 @@ class Solution {
         sort(lo, mid, A, Aux);
         sort(mid + 1, hi, A, Aux);
         merge(lo, hi, mid, A, Aux);
+    }
+}
+
+//two pointer
+
+
+class Solution {
+    /**
+     * @param colors: A list of integer
+     * @param k: An integer
+     * @return: nothing
+     */
+    public void sortColors2(int[] colors, int k) {
+        if (colors == null || colors.length == 0) return;
+        int index = 0;
+        int start = 0;
+        int end = colors.length - 1;
+        
+        int min = 1;
+        int max = k;
+        //min <= max也行
+        while (min < max) {
+            while (index <= end) {
+                if (colors[index] == max) {
+                    swap(colors, index, end);
+                    end--;
+                } else if (colors[index] == min) {
+                    swap(colors, index, start);
+                    start++;
+                    index++;
+                } else {
+                    index++;
+                }
+            }
+            index = start;
+            min++;
+            max--;
+        }
+    }
+    private void swap(int[] A, int i, int j) {
+        int temp = A[i];
+        A[i] = A[j];
+        A[j] = temp;
     }
 }

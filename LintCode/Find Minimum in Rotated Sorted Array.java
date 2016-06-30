@@ -1,4 +1,4 @@
-public class Solution {
+eeepublic class Solution {
     public int findMin(int[] nums) {
         if (nums == null || nums.length == 0) return -1;
         int start = 0;

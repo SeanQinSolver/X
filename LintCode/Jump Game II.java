@@ -80,6 +80,43 @@ public:
 };
 
 
+//greedy1 java version
+
+public class Solution {
+    /**
+     * @param A: A list of lists of integers
+     * @return: An integer
+     */
+    public int jump(int[] A) {
+        //dp[i]为Index到达i需要的步数
+        int[] dp = new int[A.length];
+        
+        int len = A.length;
+        int right = len - 1;
+        int min_index = len - 1;
+        
+        int count = 0;
+        
+        while (right > 0) {
+            //int farthest = right;
+            for (int i = right - 1; i >= 0; i--) {
+                if (i + A[i] >= right) {
+                    min_index = i;
+                }
+            }
+            
+            if (min_index < right) {
+                right = min_index;
+                count++;
+            } else {
+                //不能覆盖
+                return -1;
+            }
+        }
+        return count;
+    }
+}
+
 //greed2 from top to bottom c++
 
 class Solution {
@@ -104,7 +141,7 @@ public:
                 }
             }
             
-            if (end < farthest) {
+            if (end < farthet) {
                 ++jumps;
                 start = end + 1;
                 end = farthest;
@@ -133,9 +170,9 @@ public class Solution {
         int start = 0;
         int end = 0;
         int jumps = 0;
+        int farthest = 0;
         
         while (end < len) {
-            int farthest = end;
             for (int i = start; i <= end; i++) {
                 if (i + A[i] >= farthest) {
                     farthest = i + A[i];

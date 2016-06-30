@@ -1,3 +1,4 @@
+//写法1
 public class Solution {
     
     public void nextPermutation(int[] nums) {
@@ -43,7 +44,56 @@ public class Solution {
 }
 
 
+
+
 //此题关键是先找第一个nums[i] < nums[i+1]的。设leftIndex = i.
 //若index到头了还为1,则把全部翻转
 //再找第一个num[j] > num[leftIndex]，设置rightIndex = j
 //交换rightIndex与leftIndex，然后再翻转leftIndex + 1到头
+
+
+//写法2
+
+public class Solution {
+    
+    public void nextPermutation(int[] nums) {
+        if (nums == null || nums.length == 0) return;
+        int leftIndex = -1;
+        for (int i = nums.length - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
+                leftIndex = i;
+                break;
+            }
+        }
+        
+        if (leftIndex == -1) {
+            reverse(nums, 0, nums.length - 1);
+            return;
+        }
+        
+        int rightIndex = nums.length - 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[i] > nums[leftIndex]) {
+                rightIndex = i;
+                break;
+            }
+        }
+        
+        swap(nums, leftIndex, rightIndex);
+        reverse(nums, leftIndex + 1, nums.length - 1);
+        
+    }
+    
+    private void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            swap(nums, start, end);
+            start++;
+            end--;
+        }
+    }
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}

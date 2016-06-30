@@ -40,3 +40,31 @@ public class Solution {
         }
     }
 }
+
+//写法3
+public class Solution {
+    public void sortLetters(char[] chars) {
+        int pointer1 = 0;
+        int pointer2 = chars.length - 1;
+        
+        while (pointer1 < pointer2) {
+            while (pointer1 <= chars.length - 1 && Character.isLowerCase(chars[pointer1])) {
+                pointer1++;
+                
+            }
+            while (pointer2 >=0 && Character.isUpperCase(chars[pointer2])) {
+                pointer2--;
+                
+            }
+            if (pointer1 >= pointer2) break;
+            exch(chars, pointer1, pointer2);
+            pointer1++;
+            pointer2--;
+        }
+    }
+    private void exch(char[] chars, int i, int j) {
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+    }
+}

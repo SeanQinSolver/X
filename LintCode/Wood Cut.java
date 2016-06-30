@@ -68,11 +68,11 @@ public class Solution {
                 end = mid;
             }
         }
-        //此题注意先检测start再检测end
-        if (cal(L, start) >= k) {
-            return start;
-        } else if(cal(L, end) >= k){
+        //此题注意先检测end再检测start
+        if (cal(L, end) >= k) {
             return end;
+        } else if(cal(L, start) >= k){
+            return start;
         } else {
             return 0;
         }

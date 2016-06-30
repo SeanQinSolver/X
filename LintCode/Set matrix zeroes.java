@@ -59,3 +59,55 @@ public class Solution {
         }
     }
 }
+
+
+//写法2
+
+public class Solution {
+    /**
+     * @param matrix: A list of lists of integers
+     * @return: Void
+     */
+    
+    //将第一行与第一列作为零。
+    public void setZeroes(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return;
+        
+        boolean first_row_empty = false;
+        boolean first_col_empty = false;
+        
+        int m = matrix.length;
+        int n = matrix[0].length;
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    if (i == 0) first_row_empty = true;
+                    if (j == 0) first_col_empty = true;
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+        
+        
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        
+        if (first_row_empty) {
+            for (int i = 0; i < n; i++) {
+                matrix[0][i] = 0;
+            }
+        }
+        if (first_col_empty) {
+            for (int j = 0; j < m; j++) {
+                matrix[j][0] = 0;
+            }
+        }
+    }
+}

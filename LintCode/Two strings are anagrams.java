@@ -1,23 +1,28 @@
+//method1 o(n)
 public class Solution {
     /**
-     * @param matrix: A list of lists of integers
-     * @return: Void
+     * @param s: The first string
+     * @param b: The second string
+     * @return true or false
      */
-    public void rotate(int[][] matrix) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return;
+    public boolean anagram(String s, String t) {
+        if (s == null || t == null) return false;
+        
+        int[] array = new int[256];
+        
+        for (int i = 0; i < s.length(); i++) {
+            array[(int)s.charAt(i)]++;
         }
         
-        int length = matrix.length;
-        
-        for (int i = 0; i < length / 2; i++) {
-            for (int j = 0; j < (length + 1) / 2; j++) {
-                int tmp = matrix[i][j];
-                matrix[i][j] = matrix[length - j - 1][i];
-                matrix[length - j - 1][i] = matrix[length - i - 1][length - j - 1];
-                matrix[length - i - 1][length - j - 1] = matrix[j][length - i - 1];
-                matrix[j][length - i - 1] = tmp;
-            }
+        for (int i = 0; i < t.length(); i++) {
+            array[(int)t.charAt(i)]--;
+            if (array[(int)t.charAt(i)] < 0) return false;
         }
+        return true;
     }
-}
+};
+
+
+//method2 o(NLOGN)
+
+Arrays.sort()

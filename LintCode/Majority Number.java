@@ -41,7 +41,7 @@ public class Solution {
             if (map.containsKey(num)) {
                 map.put(num, map.get(num) + 1);
                 if (map.get(num) * 2 > nums.size()) {
-                    return map.get(num);
+                    return num;
                 }
                 continue;
             }

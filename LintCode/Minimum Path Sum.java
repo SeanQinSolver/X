@@ -16,6 +16,7 @@ public class Solution {
         sum[0][0] = grid[0][0];
         
         for (int i = 1; i < M; i++) {
+            //注意sum[i][0]与sum[i - 1][0]的关联
             sum[i][0] = sum[i - 1][0] + grid[i][0];
         }
         

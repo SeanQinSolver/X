@@ -13,7 +13,7 @@ class Solution {
            int right = ((1 << i) - 1);
            mask = left | right;
        } else {
-           //如果大于31的话，只管起始的i
+           //如果大于31的话，只管起始的i，因为j用ones去算话会溢出
            mask = (1 << i) - 1;
        }
        return (mask & n) | (m << i); 

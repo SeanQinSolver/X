@@ -1,6 +1,47 @@
 class Solution {
     /**
-      * @param n: n
+     * @param n: n
+     * @param k: the kth permutation
+     * @return: return the k-th permutation
+     */
+    public String getPermutation(int n, int k) {
+        int total = fac(n);
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+        for (int i = 1; i <= n; i++) {
+            temp.add(i);
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < n; i++) {
+            total /= (n - i);
+            int index = (k - 1) / total;
+            sb.append(temp.get(index));
+            temp.remove(index);
+            k = k - index * total;
+        }
+        return sb.toString();
+    }
+    
+    private int fac(int i) {
+        int res = 1;
+        for (int m = 1; m <= i; m++) {
+            res *= m;
+        }
+        return res;
+    }
+}
+`
+
+// 上面的算法都是逐个的求排列，有没有什么方法不是逐个求，而是直接构造出第k个排列呢？我们以n = 4，k = 17为例，数组src = [1,2,3,...,n]。
+
+// 第17个排列的第一个数是什么呢：我们知道以某个数固定开头的排列个数 = (n-1)! = 3! = 6, 即以1和2开头的排列总共6*2 = 12个，12 < 17, 因此第17个排列的第一个数不可能是1或者2，6*3 > 17, 因此第17个排列的第一个数是3。即第17个排列的第一个数是原数组（原数组递增有序）的第m = upper(17/6) = 3（upper表示向上取整）个数. 原数组中index为2.
+
+// 第一个数固定后，我们从src数组中删除该数，那么就相当于在当前src的基础上求第k - (m-1)*(n-1)! = 17 - 2*6 = 5个排列，因此可以递归的求解该问题。 注意计算的时候(m-1) *(n - 1)相当于index * total即是Index的运算
+
+class Solution {
+    /**
+     * @param n: n
       * @param k: the kth permutation
       * @return: return the k-th permutation
       */

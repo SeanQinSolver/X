@@ -54,3 +54,58 @@ public class Solution {
     }
 }
 //只要个数不是3的倍数，则第一手可以赢
+
+
+//method3
+public class Solution {
+    /**
+     * @param n: an integer
+     * @return: a boolean which equals to true if the first player will win
+     */
+    public boolean firstWillWin(int n) {
+        if (n == 0) return false;
+        if (n == 1) return true;
+        
+        boolean[] dp = new boolean[n + 1];
+        
+        dp[0] = false;
+        dp[1] = true;
+        
+        for (int i = 2; i < dp.length; i++) {
+            if (!(dp[i - 2] && dp[i - 1])) {
+                dp[i] = true;
+            }
+        }
+        return dp[n];
+    }
+}
+
+//http://www.meetqun.com/thread-10440-1-1.html
+
+//method4 写法4
+
+public class Solution {
+    /**
+     * @param n: an integer
+     * @return: a boolean which equals to true if the first player will win
+     */
+    public boolean firstWillWin(int n) {
+        if (n == 0) return false;
+        if (n == 1) return true;
+        
+        boolean[] dp = new boolean[n + 1];
+        
+        dp[0] = false;
+        dp[1] = true;
+        dp[2] = true;
+        
+        for (int i = 3; i < dp.length; i++) {
+            if (!(dp[i - 2] && dp[i - 1])) {
+                dp[i] = true;
+            }
+        }
+        return dp[n];
+    }
+}
+
+//http://www.meetqun.com/thread-10440-1-1.html

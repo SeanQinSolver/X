@@ -38,6 +38,50 @@ public class Solution {
 Time O(m + n).
 Space O(m + n).
 
+//Solution1写法2
+class Solution {
+    /**
+     * @param A: An integer array.
+     * @param B: An integer array.
+     * @return: a double whose format is *.5 or *.0
+     */
+    public double findMedianSortedArrays(int[] A, int[] B) {
+        int[] newArray = merge(A, B);
+        int newLen = newArray.length;
+        // for (int i : newArray) {
+        //     System.out.println(i);
+        // }
+        if (newLen % 2 == 0) {
+            return (newArray[newLen / 2] + newArray[newLen / 2 - 1]) / 2.0;
+        } else {
+            return newArray[newLen / 2];
+        }
+    }
+    private int[] merge(int[] A, int[] B) {
+        if (A == null) return B;
+        if (B == null) return A;
+        int p1 = 0;
+        int p2 = 0;
+        int[] rst = new int[A.length + B.length];
+        int index = 0;
+        while (p1 < A.length && p2 < B.length) {
+            if (A[p1] < B[p2]) {
+                rst[index] = A[p1];
+                p1++;
+            } else {
+                rst[index] = B[p2];
+                p2++;
+            }
+            index++;
+        }
+        
+        while (p1 < A.length) rst[index++] = A[p1++];
+        while (p2 < B.length) rst[index++] = B[p2++];
+        return rst;
+    }
+}
+
+
 //solution2 merge with space optimization
 
 public class Solution {
@@ -117,7 +161,7 @@ public class Solution {
             return (findKth(A, 0, B, 0, len / 2) + findKth(A, 0, B, 0, len / 2 + 1)) / 2.0;
         } else {
             //奇数个数的话median就是中间一个数
-            return findKth(A, 0, B, 0, len / 2);
+            return findKth(A, 0, B, 0, len / 2 + 1);
         }
     }
     
@@ -171,3 +215,42 @@ k为1时，无需再递归调用，直接返回较小值。如果 k 为1不返�
 接下来分析findMedianSortedArrays：
 首先考虑异常情况，A, B都为空。
 A+B 的长度为偶数时返回len / 2和 len / 2 + 1的均值，为奇数时则返回len / 2 + 1
+
+
+//写法2
+
+public class Solution {
+    public double findMedianSortedArrays(int[] A, int[] B) {
+        if ((A == null || A.length == 0) && (B == null || B.length == 0)) return -1.0;
+        
+        int len = A.length + B.length;
+        if (len % 2 == 1) {
+            return findKth(A, 0, B, 0, len / 2 + 1);
+        } else {
+            return (findKth(A, 0, B, 0, len / 2) + findKth(A, 0, B, 0, len / 2 + 1)) / 2.0;
+        }
+    }
+    
+    private int findKth(int[] A, int indexA, int[] B, int indexB, int k) {
+        if (indexA >= A.length) {
+            return B[indexB + k - 1];
+        }
+        if (indexB >= B.length) {
+            return A[indexA + k - 1];
+        }
+        
+        if (k == 1) return Math.min(A[indexA], B[indexB]);
+        
+        int keyA = Integer.MAX_VALUE;
+        int keyB = Integer.MAX_VALUE;
+        
+        if (indexA + k / 2 - 1 < A.length) keyA = A[indexA + k / 2 - 1];
+        if (indexB + k / 2 - 1 < B.length) keyB = B[indexB + k / 2 - 1];
+        
+        if (keyA < keyB) {
+            return findKth(A, indexA + k / 2, B, indexB, k - k / 2);
+        } else {
+            return findKth(A, indexA, B, indexB + k / 2, k - k / 2);
+        }
+    }
+}

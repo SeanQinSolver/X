@@ -38,3 +38,21 @@ public class Solution {
         return newTable;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//若是新node加到首部，这样写
+ListNode newNode = new ListNode(node.val);
+newNode.next = newTable[newIndex];
+newTable[newIndex] = newNode;

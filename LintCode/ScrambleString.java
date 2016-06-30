@@ -45,6 +45,10 @@ public class Solution {
         return true;
     }
 }
+
+http://blog.unieagle.net/2012/10/23/leetcode%E9%A2%98%E7%9B%AE%EF%BC%9Ascramble-string%EF%BC%8C%E4%B8%89%E7%BB%B4%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/
+
+
 //method2 memoization
 
 

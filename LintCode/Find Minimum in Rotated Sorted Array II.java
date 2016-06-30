@@ -21,3 +21,19 @@ public class Solution {
 }
 
 //method2//sequential search
+
+public class Solution {
+    /**
+     * @param num: a rotated sorted array
+     * @return: the minimum number in the array
+     */
+    public int findMin(int[] nums) {
+        // write your code here
+        if (nums == null || nums.length == 0) return 0;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            min = Math.min(min, nums[i]);
+        }
+        return min;
+    }
+}

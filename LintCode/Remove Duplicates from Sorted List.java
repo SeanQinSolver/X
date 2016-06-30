@@ -29,3 +29,28 @@ public class Solution {
         return head;
     }
 }
+
+
+//写法2
+
+public class Solution {
+    /**
+     * @param ListNode head is the head of the linked list
+     * @return: ListNode head of linked list
+     */
+    public static ListNode deleteDuplicates(ListNode head) {
+        if (head == null) return head;
+        
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        while (dummy.next.next != null) {
+            int temp = dummy.next.val;
+            if (dummy.next.next.val == temp) {
+                dummy.next.next = dummy.next.next.next;
+            } else {
+                dummy = dummy.next;
+            }
+        }
+        return head;
+    }
+}

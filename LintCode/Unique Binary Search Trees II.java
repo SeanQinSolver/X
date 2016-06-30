@@ -26,6 +26,7 @@ public class Solution {
         
         for (int i = start; i <= end; i++) {
             //每一层都是一个result来存相应的组合数
+            //注意i - 1和i + 1
             List<TreeNode> leftNodes = helper(start, i - 1);
             List<TreeNode> rightNodes = helper(i + 1, end);
             

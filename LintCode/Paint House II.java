@@ -5,6 +5,7 @@ public class Solution {
      */
     public int minCostII(int[][] costs) {
         if (costs == null || costs.length == 0) return 0;
+        //注意这里要设置为零
         int preMin = 0;
         int preSec = 0;
         int preIndex = -1;

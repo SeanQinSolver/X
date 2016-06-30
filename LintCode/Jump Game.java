@@ -38,7 +38,7 @@ public class Solution {
         
         int farthest = A[0];
         for (int i = 1; i <= A.length - 1; i++) {
-            if ((i <= farthest) && (i + A[i] > farthest)) {
+            if ((i <    farthest) && (i + A[i] > farthest)) {
                 farthest = i + A[i];
             }
         }
@@ -70,6 +70,30 @@ public class Solution {
         }
         
         return can[A.length - 1];
+    }
+}
+
+//dp写法2
+public class Solution {
+    /**
+     * @param A: A list of integers
+     * @return: The boolean answer
+     */
+    public boolean canJump(int[] A) {
+        int len = A.length;
+        //这里不能设置成len + 1，走出去了
+        boolean[] dp = new boolean[len];
+        dp[0] = true;
+        
+        for (int i = 1; i < len; i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (dp[j] && A[j] + j >= i) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[A.length - 1];
     }
 }
 

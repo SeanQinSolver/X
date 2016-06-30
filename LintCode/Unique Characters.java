@@ -18,3 +18,20 @@ public class Solution {
         return true;
     }
 }
+
+public class Solution {
+    /**
+     * @param str: a string
+     * @return: a boolean
+     */
+    public boolean isUnique(String str) {
+        if (str == null || str.length() == 0) return true;
+        
+        int[] array = new int[256];
+        for (int i = 0; i < str.length(); i++) {
+            array[str.charAt(i)]++;
+            if (array[str.charAt(i)] > 1) return false;
+        }
+        return true;
+    }
+}

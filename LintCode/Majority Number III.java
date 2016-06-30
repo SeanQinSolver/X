@@ -32,6 +32,8 @@ public class Solution {
         //find max
         int maxKey = -1;
         int maxCount = 0;
+        
+        
         for (int key : map.keySet()) {
             if (map.get(key) > maxCount) {
                 maxKey = key;

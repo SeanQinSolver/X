@@ -1,3 +1,38 @@
+//Better 写法
+public class Solution {
+    /**
+     * @param values: an array of integers
+     * @return: a boolean which equals to true if the first player will win
+     */
+    public boolean firstWillWin(int[] values) {
+        int len = values.length;
+        
+        if (len <= 2) return true;
+        //DP[i]代表i到end能取到的最大值
+        int[] dp = new int[len + 1];
+        dp[len] = 0;
+        dp[len - 1] = values[len - 1];
+        dp[len - 2] = values[len - 1] + values[len - 2];
+        dp[len - 3] = values[len - 3] + values[len - 2];
+        for (int i = len - 4; i >= 0; i--) {
+            //取values[i]
+            dp[i] = values[i] + Math.min(dp[i + 2], dp[i + 3]);
+            //取values[i], values[i + 1]
+            dp[i] = Math.max(dp[i], values[i] + values[i + 1] + Math.min(dp[i + 3], dp[i + 4]));
+        }
+        
+        int sum = 0;
+        for (int i : values) {
+            sum += i;
+        }
+        return dp[0] > sum - dp[0];
+    }
+}
+
+
+
+
+
 public class Solution {
     /**
      * @param values: an array of integers

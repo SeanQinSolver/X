@@ -1,4 +1,4 @@
-public class Solution {
+opublic class Solution {
     
     public int lengthOfLastWord(String s) {
         int length = 0;
@@ -13,5 +13,17 @@ public class Solution {
             }
         }
         return length;
+    }
+}
+
+
+//method2
+
+public class Solution {
+    
+    public int lengthOfLastWord(String s) {
+        //if (s == null || s.length == 0) return 0;
+        String[] array = s.split("\\W");
+        return array[array.length - 1].length();
     }
 }

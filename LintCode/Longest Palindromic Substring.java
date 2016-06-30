@@ -1,4 +1,4 @@
-//manacher
+//manacher n2
 
 public class Solution {
     public String longestPalindrome(String s) {

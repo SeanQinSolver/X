@@ -58,4 +58,64 @@ public class Solution {
     }
 }
 
+//写法2
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    /**
+     * @param headA: the first list
+     * @param headB: the second list
+     * @return: a ListNode
+     */
+    
+    
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+        
+        ListNode tailA = getTail(headA);
+        tailA.next = headB;
+        
+        ListNode slow = headA;
+        ListNode fast = headA;
+        
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                break;
+            }
+        }
+        
+        slow = headA;
+        
+        ListNode intersection = getIntesection(slow, fast);
+        return intersection;
+        
+    }
+    
+    private ListNode getTail(ListNode headA) {
+        while (headA.next != null) {
+            headA = headA.next;
+        }
+        return headA;
+    }
+    
+    private ListNode getIntesection(ListNode headA, ListNode headB) {
+        while (true) {
+            if (headA == headB) return headA;
+            headA = headA.next;
+            headB = headB.next;
+        }
+    }
+}
+
 //

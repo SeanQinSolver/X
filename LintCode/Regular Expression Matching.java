@@ -1,6 +1,45 @@
+//BEST WRITING
+
+public class Solution {
+    /**
+     * @param s: A string
+     * @param p: A string includes "." and "*"
+     * @return: A boolean
+     */
+    public boolean isMatch(String s, String p) {
+        int m = s.length();
+        int n = p.length();
+        //dp[i][j]代表s的0-i可否与p的0-j匹配
+        boolean[][] dp = new boolean[m + 1][n + 1];
+        
+        dp[0][0] = true;
+        
+        for (int i = 0; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (p.charAt(j - 1) != '.' && p.charAt(j - 1) != '*') {
+                    if (i > 0 && s.charAt(i - 1) == p.charAt(j - 1) && dp[i - 1][j - 1]) {
+                        dp[i][j] = true;
+                    }
+                }
+                
+                else if (p.charAt(j - 1) == '.') {
+                    if (i > 0 && dp[i - 1][j - 1]) dp[i][j] = true;
+                }
+                
+                else if (j > 1) {
+                    if (dp[i][j - 1] || dp[i][j - 2]) {
+                        dp[i][j] = true;
+                    } else if (i > 0 && (p.charAt(j - 2) == s.charAt(i - 1) || p.charAt(j - 2) == '.') && dp[i - 1][j]) {
+                        dp[i][j] = true;
+                    }
+                }
+            }
+        }
+        return dp[m][n];
+    }
+}
+
 //method1 DP
-
-
 
 public class Solution {
     /**

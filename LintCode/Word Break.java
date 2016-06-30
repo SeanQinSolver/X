@@ -1,3 +1,4 @@
+
 public class Solution {
     public boolean wordBreak(String s, Set<String> wordDict) {
         if (s == null || s.length() == 0) return true;
@@ -12,7 +13,6 @@ public class Solution {
             //dp[i] = false;
             for (int currentLen = 1; currentLen <= maxLen && currentLen <= i; currentLen++) {
                 if (!dp[i - currentLen]) continue;
-                
                 String temp = s.substring(i - currentLen, i);
                 if (wordDict.contains(temp)) {
                     dp[i] = true;
@@ -58,6 +58,7 @@ public class Solution {
         for (int i = 1; i <= s.length(); i++) {
             for (int j = i - 1; j >= 0; j--) {
                  //j到i的距离切成字
+                //lintcode有个test case这样
                 if (i -  j > maxLen) break;
                 if (!dp[j]) continue;
                 String temp = s.substring(j, i);

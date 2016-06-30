@@ -14,7 +14,7 @@ class Solution {
             return -1;
         }
         
-        int result = fastPower(a, b, n / 2);
+        long result = fastPower(a, b, n / 2);
         result = (result * result) % b;
         if (n % 2 == 1) {
             result = (result * a) % b;

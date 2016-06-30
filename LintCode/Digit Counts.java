@@ -1,3 +1,37 @@
+//O(Nlog10N)
+
+class Solution {
+    /*
+     * param k : As description.
+     * param n : As description.
+     * return: An integer denote the count of digit k in 1..n
+     */
+    public int digitCounts(int k, int n) {
+        int count = 0;
+        int index = k;
+        
+        while (index <= n) {
+            count += helper(index, k);
+            index++;
+        }
+        return count;
+    }
+    
+    private int helper(int index, int k) {
+        if (index == 0) return 1;
+        int count = 0;
+        while (index != 0) {
+            if (index % 10 == k) {
+                count++;
+            }
+            index = index / 10;
+        }
+        return count;
+    }
+};
+
+
+//O(N2)
 class Solution {
     /*
      * param k : As description.
