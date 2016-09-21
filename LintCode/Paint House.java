@@ -31,6 +31,7 @@ public class Solution {
 
 //method2, constant space o(1)
 //o(n) time
+//in space
 
 public class Solution {
     /**

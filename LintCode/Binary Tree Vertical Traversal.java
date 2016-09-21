@@ -53,3 +53,72 @@ public class Solution {
         }
     }
 }
+
+
+//写法2
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> verticalOrder(TreeNode root) {
+        List<List<Integer>> rst = new ArrayList<>();
+        if (root == null) {
+            return rst;
+        }
+        
+        Queue<MapNode> queue = new ArrayDeque<>();
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        
+        //map.put(0, new ArrayList<>());
+        //map.get(0).add(root.val);
+        
+        queue.offer(new MapNode(0, root));
+        int min = 0;
+        int max = 0;
+        
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            //for (int i = 0;  i < size; i++) {
+            MapNode mapNode = queue.poll();
+            
+            if (!map.containsKey(mapNode.level)) {
+                map.put(mapNode.level, new ArrayList<>());
+            }
+            map.get(mapNode.level).add(mapNode.node.val);
+            
+            
+            if (mapNode.node.left != null) {
+                queue.offer(new MapNode(mapNode.level - 1, mapNode.node.left));
+                min = Math.min(min, mapNode.level - 1);
+                
+            }
+            if (mapNode.node.right != null) {
+                queue.offer(new MapNode(mapNode.level + 1, mapNode.node.right));
+                max = Math.max(max, mapNode.level + 1);
+            }
+            //}
+        }
+        
+        for (int i = min; i <= max; i++) {
+            //System.out.println(map.get(0));
+            rst.add(map.get(i));
+        }
+        return rst;
+    }
+    
+    class MapNode {
+        int level;
+        TreeNode node;
+        public MapNode(int level, TreeNode node) {
+            this.node = node;
+            this.level = level;
+        }
+    }
+}

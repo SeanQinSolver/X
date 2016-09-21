@@ -82,8 +82,9 @@ class Solution {
 }
 
 
-//solution2 merge with space optimization
-
+// Solution2 merge with space optimization
+// Time O(m + n)
+// Space O(1)
 public class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         if ((nums1 == null || nums1.length == 0) && (nums2 == null || nums2.length == 0)) return -1.0;
@@ -143,8 +144,7 @@ public class Solution {
     }
 }
 
-Time O(m + n)
-Space O(1)
+
 //method3
 //binary search
 public class Solution {

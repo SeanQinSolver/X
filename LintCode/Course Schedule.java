@@ -71,26 +71,27 @@ public class Solution {
             }
         }
         
+        Queue<Integer> queue = new ArrayDeque<Integer>();
+        
         for (int i = 0; i < numCourses; i++) {
-            int j = 0;
-            //find the course with zero pre-course
-            for (; j < numCourses; j++) {
-                if (countVertex[j] == 0) break;
-            }
-            //if not find the non-ore course
-            if (j == numCourses) return false;
-            
-            //has been visited
-            countVertex[j] = -1;
-            
-            //decrease courses that post the course
-            HashSet<Integer> set = list.get(j);
-            Iterator<Integer> ite = set.iterator();
-            while (ite.hasNext()) {
-                countVertex[ite.next()]--;
+            if (indegree[i] == 0) {
+                queue.offer(i);
             }
         }
-        return true;
+        
+        int count = numCourses;
+        
+        while (!queue.isEmpty()) {
+            int cur = queue.poll();
+            for (int i : list.get(cur)) {
+                indegree[i]--;
+                if (indegree[i] == 0) {
+                    queue.offer(i);
+                }
+            }
+            count--;
+        }
+        return count == 0;
     }
 }
 
@@ -109,6 +110,7 @@ public class Solution {
         }
         int[] visited = new int[numCourses];
         Arrays.fill(visited, 0);
+        
         for (int i = 0; i < numCourses; i++) {
             //whether each point could finish the dfs = no DAGs
             if (!dfs(list, visited, i)) return false;

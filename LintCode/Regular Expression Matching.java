@@ -1,35 +1,32 @@
 //BEST WRITING
-
+//DP
 public class Solution {
-    /**
-     * @param s: A string
-     * @param p: A string includes "." and "*"
-     * @return: A boolean
-     */
     public boolean isMatch(String s, String p) {
         int m = s.length();
         int n = p.length();
-        //dp[i][j]代表s的0-i可否与p的0-j匹配
+        //0-m是否能够和0-n匹配
         boolean[][] dp = new boolean[m + 1][n + 1];
-        
         dp[0][0] = true;
         
         for (int i = 0; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
+                //一个字母和另外一个字母相比
                 if (p.charAt(j - 1) != '.' && p.charAt(j - 1) != '*') {
-                    if (i > 0 && s.charAt(i - 1) == p.charAt(j - 1) && dp[i - 1][j - 1]) {
+                    if ((i > 0) && (p.charAt(j - 1) == s.charAt(i - 1)) && dp[i - 1][j - 1]) {
                         dp[i][j] = true;
                     }
-                }
-                
-                else if (p.charAt(j - 1) == '.') {
-                    if (i > 0 && dp[i - 1][j - 1]) dp[i][j] = true;
-                }
-                
-                else if (j > 1) {
-                    if (dp[i][j - 1] || dp[i][j - 2]) {
+                    //一个字母和'.'相比
+                } else if (p.charAt(j - 1) == '.') {
+                    if (i > 0 && dp[i - 1][j - 1]) {
                         dp[i][j] = true;
-                    } else if (i > 0 && (p.charAt(j - 2) == s.charAt(i - 1) || p.charAt(j - 2) == '.') && dp[i - 1][j]) {
+                    }
+                } else if (j > 1) {
+                    //若j-1等于'*'
+                    if (dp[i][j - 2]) {
+                        //匹配0个,那么pattern直接跳过2个
+                        dp[i][j] = true;
+                    } else if (i > 0 && (s.charAt(i - 1) == p.charAt(j - 2) || p.charAt(j - 2) == '.') && dp[i - 1][j]){
+                        //匹配多个
                         dp[i][j] = true;
                     }
                 }
@@ -38,6 +35,29 @@ public class Solution {
         return dp[m][n];
     }
 }
+
+//dfs
+public class Solution {
+    /**
+     * @param s: A string
+     * @param p: A string includes "." and "*"
+     * @return: A boolean
+     */
+    public boolean isMatch(String s, String p) {
+        if (p.isEmpty()) {
+            return s.isEmpty();
+        }
+        if (p.length() > 1 && p.charAt(1) == '*') {
+            //略过两个或者匹配一个
+            if (isMatch(s, p.substring(2)) || !s.isEmpty() && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.') && isMatch(s.substring(1), p)) {
+                return true;
+            }
+        } else if (!s.isEmpty() && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.') && isMatch(s.substring(1), p.substring(1))) {
+            return true;
+        }
+        return false;
+    }
+
 
 //method1 DP
 
@@ -107,8 +127,6 @@ public class Solution {
 
 //Method2
 
-
-
 public class Solution {
     /**
      * @param s: A string 
@@ -133,6 +151,29 @@ public class Solution {
                 }
                 i++;
             }
+        }
+        return false;
+    }
+}
+
+//dfs
+public class Solution {
+    /**
+     * @param s: A string
+     * @param p: A string includes "." and "*"
+     * @return: A boolean
+     */
+    public boolean isMatch(String s, String p) {
+        if (p.isEmpty()) {
+            return s.isEmpty();
+        }
+        if (p.length() > 1 && p.charAt(1) == '*') {
+            //略过两个或者匹配一个
+            if (isMatch(s, p.substring(2)) || !s.isEmpty() && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.') && isMatch(s.substring(1), p)) {
+                return true;
+            }
+        } else if (!s.isEmpty() && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.') && isMatch(s.substring(1), p.substring(1))) {
+            return true;
         }
         return false;
     }

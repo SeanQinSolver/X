@@ -38,7 +38,7 @@ class Solution {
 
 
 //method2
-
+//注意leetcode写法
 class Solution {
     /**
      * @param n an integer
@@ -72,3 +72,28 @@ class Solution {
         
     }
 };
+
+//method3
+
+public class Solution {
+    public int nthUglyNumber(int n) {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        
+        PriorityQueue<Long> queue = new PriorityQueue<Long>();
+        queue.offer(1l);
+        long cur = 0;
+        while (n > 0) {
+            while (queue.peek() == cur) {
+                queue.poll();
+            }
+            cur = queue.poll();
+            queue.offer(cur * 2);
+            queue.offer(cur * 3);
+            queue.offer(cur * 5);
+            System.out.println(queue.size());
+            n--;
+        }
+        return (int)cur;
+    }
+}

@@ -9,7 +9,7 @@
 *     }
 * }
 */
-//method1 heap
+//method1 heap NLogN
 public class Solution {
 /**
  * @param lists: a list of ListNode
@@ -50,7 +50,7 @@ private Comparator<ListNode> newComparator = new Comparator<ListNode>() {
     }
 }
 
-//method2 mergesort
+//method2 mergesort NlogN
 
 /**
  * Definition for ListNode.

@@ -71,7 +71,7 @@ public class Solution {
             }
         }
         
-        //写法1 dfs------------
+        //写法1 dfs-----------
         int[] rst = new int[numCourses];
         int count = 0;
         while (!queue.isEmpty()) {
@@ -86,7 +86,7 @@ public class Solution {
         }
         //--------------------
         
-        //写法2. bfs + dfs-----
+        //写法2. bfs-----
         while (!queue.isEmpty()) {
             int sizeTemp = queue.size();
             for (int i = 0; i < sizeTemp; i++) {

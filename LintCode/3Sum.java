@@ -42,3 +42,40 @@ public class Solution {
         return result;
     }
 }
+
+//method2: hashMap (2sum method)
+
+public class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Set<List<Integer>> result = new HashSet<List<Integer>>();
+        
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            map.clear();
+            int curr = 0 - nums[i];
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left <= right) {
+                if (map.containsKey(curr - nums[left])) {
+                    List<Integer> path = new ArrayList<Integer>();
+                    path.add(nums[i]);
+                    path.add(curr - nums[left]);
+                    path.add(nums[left]);
+                    Collections.sort(path);
+                    result.add(path);
+                } else {
+                    map.put(nums[left], left);
+                }
+                left++;
+            }
+        }
+        
+        List<List<Integer>> res = new ArrayList<>();
+        for (List<Integer> li : result) {
+            res.add(new ArrayList<Integer>(li));
+        }
+        
+        return res;
+    }
+}

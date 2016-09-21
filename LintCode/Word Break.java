@@ -72,3 +72,48 @@ public class Solution {
     }
 }
 
+
+//3
+
+public class Solution {
+    public boolean wordBreak(String s, Set<String> wordDict) {
+        if (s == null || s.length() == 0) return true;
+        int len = s.length();
+        boolean[] dp = new boolean[len + 1];
+        dp[0] = true;
+        //dp[len] = true;
+        int maxLen = getMaxLen(wordDict);
+        
+        // for (int i = len - 1; i >= 0; i--) {
+        //     for (int j = i; j <= len - 1; j++) {
+        //         if (j - i > maxLen) continue;
+        //         if (dp[j + 1] && wordDict.contains(s.substring(i, j + 1))) {
+        //             dp[i] = true;
+        //             break;
+        //         }
+        //     }
+        // }
+        // return dp[0];
+        
+        for (int i = 1; i <= len; i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (i - j > maxLen) continue;
+                if (dp[j] && wordDict.contains(s.substring(j,  i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[len];
+        
+    }
+    
+    private int getMaxLen(Set<String> group) {
+        int maxLen = Integer.MIN_VALUE;
+        for (String s : group) {
+            maxLen = Math.max(s.length(), maxLen);
+        }
+        return maxLen;
+    }
+}
+

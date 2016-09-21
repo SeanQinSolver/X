@@ -49,8 +49,6 @@ public class Solution {
     }
 }
 
-//manacher method
-
 //Method1 n2
 public class Solution {
     /**
@@ -123,3 +121,44 @@ public class Solution {
         return true;
     }
 }
+
+
+//dp
+
+public class Solution {
+    public String longestPalindrome(String s) {
+        if (s == null) return s;
+        
+        boolean[][] isPalindrome = new boolean[s.length()][s.length()];
+        int maxLen = 1;
+        
+        for (int i = 0; i < s.length(); i++) {
+            isPalindrome[i][i] = true;
+        }
+        int start = 0;
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i - 1) == s.charAt(i)) {
+                isPalindrome[i - 1][i] = true;
+                maxLen = 2;
+                start = i - 1;
+            }
+        }
+        
+        
+        for (int len = 3; len <= s.length(); len++) {
+            for (int i = 0; i + len <= s.length(); i++) {
+                int j = i + len - 1;
+                if (s.charAt(j) == s.charAt(i) && isPalindrome[i + 1][j - 1]) {
+                    isPalindrome[i][j] = true;
+                    if (maxLen < len) {
+                        //System.out.println(maxLen);
+                        maxLen = Math.max(maxLen, len);
+                        start = i;
+                    }
+                    
+                }
+            }
+        }
+        //System.out.println(maxLen);
+        return s.substring(start, start + maxLen);
+    }

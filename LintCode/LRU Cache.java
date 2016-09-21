@@ -1,7 +1,5 @@
 public class Solution {
     
-    
-    
     private static class Node {
         int key;
         int val;
@@ -69,3 +67,46 @@ public class Solution {
         node.right = tail;
     }
 }
+
+// LinkedHashMap
+
+public class LRUCache {
+    //数据结构使用HASHMAP与DOUBLE LINKED LIST
+    // search/get fast & delete/move fast
+    
+    LinkedHashMap<Integer, Integer> cache;
+    
+    public LRUCache(int capacity) {
+        cache = new LinkedHashMap<Integer, Integer>() {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+                return cache.size() > capacity;
+            }
+        };
+    }
+    
+    
+    public int get(int key) {
+        if (cache.containsKey(key)) {
+            int value = cache.get(key);
+            moveToTail(key);
+            return value;
+        }
+        return -1;
+    }
+    
+    public void set(int key, int value) {
+        cache.put(key, value);
+        moveToTail(key);
+    }
+    public void moveToTail(int key) {
+        int val = cache.get(key);
+        cache.remove(key);
+        cache.put(key, val);
+    }
+}
+
+//get the node, remove it from current position, add it to the tail
+//set the node, add it to the tail.
+//call the method addtotail
+//notice: least used cache

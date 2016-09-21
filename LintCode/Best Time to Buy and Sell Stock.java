@@ -12,6 +12,8 @@ public class Solution {
         for(int i : prices) {
             min = min < i ? min : i;
             profit = (i - min) > profit ? (i - min) : profit;
+            //or:
+            //profit = price - min > 0 ? Math.max(price - min, profit) : profit;
         }
         return profit;
     }

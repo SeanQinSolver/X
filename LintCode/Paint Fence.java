@@ -5,7 +5,7 @@ public class Solution {
      * @return an integer, the total number of ways
      */
     public int numWays(int n, int k) {
-        if (n <= 1 || k <= 0) {
+        if (n <= 1) {
             return n * k;
         }
         //n个FENCE,所以一定要到N, 0-N为 N + 1个

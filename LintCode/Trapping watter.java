@@ -22,3 +22,39 @@ public class Solution {
         return area;
     }
 }
+
+//method2: two ways traverse
+
+public class Solution {
+    public int trap(int[] height) {
+        if (height == null || height.length == 0) {
+            return 0;
+        }
+        int leftWall = height[0];
+        int rightWall = height[height.length - 1];
+        int left = 0;
+        int right = height.length - 1;
+        left++;
+        right--;
+        int sum = 0;
+        while (left <= right) {
+            if (leftWall < rightWall) {
+                if (height[left] < leftWall) {
+                    sum += leftWall - height[left];
+                } else {
+                    leftWall = height[left];
+                }
+                left++;
+                
+            } else {
+                if (height[right] < rightWall) {
+                    sum += rightWall - height[right];
+                } else {
+                    rightWall = height[right];
+                }
+                right--;
+            }
+        }
+        return sum;
+    }
+}

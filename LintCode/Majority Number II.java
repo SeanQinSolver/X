@@ -46,7 +46,7 @@ public class Solution {
 
 
 //LEETCODE 求所有出现次数大于1/3的数
-
+//o(n)
 public class Solution {
     public List<Integer> majorityElement(int[] nums) {
         List<Integer> rst = new ArrayList<Integer>();
@@ -65,6 +65,61 @@ public class Solution {
         
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             if (entry.getValue() > k) rst.add(entry.getKey());
+        }
+        return rst;
+    }
+}
+//o(1)
+public class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        List<Integer> rst = new ArrayList<Integer>();
+        
+        if (nums == null || nums.length == 0) {
+            return rst;
+        }
+        int key1 = 0;
+        int key2 = 0;
+        int count1 = 0;
+        int count2 = 0;
+        
+        for (int num : nums) {
+            //注意这个判断顺序
+            if (key1 == num && key1 != 0) {
+                count1++;
+            } else if (key2 == num && key2 != 0) {
+                count2++;
+            } else if (count1 == 0) {
+                count1++;
+                key1 = num;
+                continue;
+            } else if (count2 == 0) {
+                count2++;
+                key2 = num;
+                continue;
+            } else {
+                count1--;
+                count2--;
+            }
+        }
+        
+        count1 = count2 = 0;
+        //System.out.println(key1 + "  " + key2);
+        
+        for (int num : nums) {
+            if (num == key1) {
+                count1++;
+            } else if (num == key2) {
+                count2++;
+            }
+        }
+        
+        int k = nums.length / 3;
+        
+        if (count1 > k) {
+            rst.add(key1);
+        }
+        if (count2 > k) {
+            rst.add(key2);
         }
         return rst;
     }

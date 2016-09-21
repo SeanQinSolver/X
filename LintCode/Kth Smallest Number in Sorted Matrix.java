@@ -25,11 +25,11 @@ public int kthSmallest(int[][] matrix, int k) {
     if (k > matrix.length * matrix[0].length) {
     return 0;
 }
-    int result = dfs(matrix, ink);
+    int result = bfs(matrix, k);
     return result;
 }
 //x row, y column
-private int dfs(int[][] matrix, int k) {
+private int bfs(int[][] matrix, int k) {
     Queue<Point> heap = new PriorityQueue<Point>(k, comparator);
         for (int i = 0; i < Math.min(matrix[0].length, k); i++) {
             heap.push(new Point(0, i, matrix[0][i]));

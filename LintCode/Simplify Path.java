@@ -29,3 +29,34 @@ public class Solution {
     }
     
 }
+
+//method2
+
+public class Solution {
+    public String simplifyPath(String path) {
+        if (path == null || path.length() == 0) {
+            return "";
+        }
+        Deque<String> q = new ArrayDeque<String>();
+        String[] array = path.split("/");
+        StringBuilder sb = new StringBuilder("/");
+        
+        for (String str : array) {
+            if (str.equals("..")) {
+                if (!q.isEmpty()) {
+                    q.pollLast();
+                }
+            } else if (!str.equals("") && !str.equals(".")) {
+                //System.out.println(str);
+                q.offerLast(str);
+            }
+        }
+        
+        while (!q.isEmpty()) {
+            sb.append(q.pollFirst());
+            sb.append("/");
+        }
+        sb = !sb.toString().equals("/") ? sb.deleteCharAt(sb.length() - 1) : sb;
+        return sb.toString();
+    }
+}

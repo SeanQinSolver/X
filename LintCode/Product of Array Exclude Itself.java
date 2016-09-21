@@ -1,3 +1,4 @@
+//o(n)
 public class Solution {
     /**
      * @param A: Given an integers array A
@@ -36,3 +37,51 @@ public class Solution {
 
 //注意此题的i是 left[i-1] 和 A.get(i-1)
 //右边是i 是right[i + 1] 和 A.get(i+1)
+
+
+//o(n) int
+
+public class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int len = nums.length;
+        int[] result = new int[len];
+        
+        int[] left = new int[len];
+        left[0] = 1;
+        for (int i = 1; i < len; i++) {
+            left[i] = left[i - 1] * nums[i - 1];
+        }
+        
+        int[] right = new int[len];
+        right[len - 1] = 1;
+        for (int i = len - 2; i >= 0; i--) {
+            right[i] = right[i + 1] * nums[i + 1];
+        }
+        
+        for (int i = 0; i < len; i++) {
+            result[i] = left[i] * right[i];
+        }
+        return result;
+    }
+}
+
+//o(1) int
+
+public class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int len = nums.length;
+        int[] rst = new int[len];
+        rst[0] = 1;
+        for (int i = 1; i < nums.length; i++) {
+            rst[i] = rst[i - 1] * nums[i - 1];
+        }
+        
+        int right = 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            rst[i] *= right;
+            right *= nums[i];
+        }
+        return rst;
+        
+    }
+}

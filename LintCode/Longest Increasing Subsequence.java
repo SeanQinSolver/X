@@ -1,3 +1,4 @@
+ //O(n^2 )
 public class Solution {
     /**
      * @param nums: The integer array
@@ -68,7 +69,7 @@ public class Solution {
         int max = Integer.MIN_VALUE;
         for (int i = 1; i < nums.length; i++) {
             for (int j = 0; j < i; j++) {
-                //这个nums[j] < nums[i]与lintcode不一样
+                //这个nums[j] < nums[i]与lintcode不一样. lintcodes是小于等于
                 if (nums[j] < nums[i] && (dp[i] < dp[j] + 1)) {
                     dp[i] = dp[j] + 1;
                     max = Math.max(max, dp[i]);
@@ -76,5 +77,34 @@ public class Solution {
             }
         }
         return max == Integer.MIN_VALUE ? 1 : max;
+    }
+}
+
+//binary search nlogn
+public class Solution {
+    public int lengthOfLIS(int[] nums) {
+        List<Integer> endNum = new ArrayList<>();
+        for (int num : nums) {
+            if (endNum.isEmpty() || endNum.get(endNum.size() - 1) < num) {
+                endNum.add(num);
+            } else {
+                endNum.set(getFirstEorL(endNum, num), num);
+            }
+        }
+        return endNum.size();
+    }
+    
+    private int getFirstEorL(List<Integer> endNum, int num) {
+        int start = 0;
+        int end = endNum.size() - 1;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            if (endNum.get(mid) < num) {
+                start = mid + 1;
+            } else {
+                end = mid;
+            }
+        }
+        return start;
     }
 }

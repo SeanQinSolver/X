@@ -40,6 +40,7 @@ public class Solution {
         Queue<String> queue = new LinkedList<String>();
         queue.offer(start);
         distance.put(start, 0);
+        
         for (String s : dict) {
             map.put(s, new ArrayList<String>());
         }
@@ -48,13 +49,15 @@ public class Solution {
             String crt = queue.poll();
             List<String> nextList = expand(crt, dict);
             for (String next : nextList) {
-                System.out.println(next);
+                //System.out.println(next);
                 map.get(next).add(crt);
                 if (!distance.containsKey(next)) {
                     distance.put(next, distance.get(crt) + 1);
+                    //System.out.print(next + "  ");
                     queue.offer(next);
                 }
             }
+            //System.out.println();
         }
     }
     
@@ -71,6 +74,10 @@ public class Solution {
                 }
             }
         }
+        
+        
+        
+        
         return expansion;
     }
 }

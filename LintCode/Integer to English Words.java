@@ -27,6 +27,7 @@ public class Solution {
             if(temp >= 10 && temp < 20) {
                 if (!res.isEmpty()) res += " ";
                 res += twenty[temp % 10];
+                //注意这个地方直接返回
                 return res;
             } else if (temp >= 20) {
                 temp = temp / 10;
