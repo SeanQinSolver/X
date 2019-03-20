@@ -1,3 +1,34 @@
+// Simpler one run way
+
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        boolean[][] visited1 = new boolean[9][9];
+        boolean[][] visited2 = new boolean[9][9];
+        boolean[][] visitedSubGrid = new boolean[9][9];
+
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char cur = board[i][j];
+                if (cur == '.') continue;
+                int col = cur - '1';
+                int row = i / 3 * 3 + j / 3;
+                
+                if (visitedSubGrid[row][col] || visited1[i][col] || visited2[j][col] || col < 0 || col > 8) {
+                    return false;
+                }
+                visitedSubGrid[row][col] = true;
+                visited1[i][col] = true;
+                visited2[j][col] = true;
+            }
+        }
+
+        return true;
+    }
+}
+
+
+
 public class Solution {
     public boolean isValidSudoku(char[][] board) {
         boolean[] visited = new boolean[9];
